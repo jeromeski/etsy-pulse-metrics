@@ -20,7 +20,7 @@ import { createEmotionCache } from "@/utils/createEmotionCache";
 import BlankLayout from "@/templates/blank-layout";
 
 // **Global Styles Imports
-import "@/styles/globals.css";
+import "@/styles/reset.css";
 
 const clientSideEmotionCache = createEmotionCache();
 

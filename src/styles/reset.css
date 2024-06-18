@@ -1,0 +1,79 @@
+/* CSS Reset for MUI Compatibility */
+
+/* Apply a more natural box-sizing model */
+html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove default margin */
+body {
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif; /* MUI's default font */
+}
+
+/* Improve text rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Remove list styles on ul, ol elements */
+ul, ol {
+  list-style: none;
+}
+
+/* Remove default styles for all heading elements */
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/* Reset link styles */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Remove default button styles */
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* Remove default styles for input, textarea, and select elements */
+input, textarea, select {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* Ensure media elements display block */
+img, video, audio {
+  display: block;
+  max-width: 100%;
+}
+
+/* Reset table styles */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Ensure form elements fill their container */
+input, textarea, select, button {
+  width: 100%;
+}
