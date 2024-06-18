@@ -7,6 +7,7 @@ import { NextPage } from "next";
 
 // **Mui Imports
 import { ThemeProvider } from "@mui/material";
+import CssBaseline from "@mui/material/CssBaseline";
 
 // **Custom Imports
 import defaultTheme from "@/theme";
@@ -39,7 +40,10 @@ export default function App({
 	const getLayout = Component.getLayout ?? ((page: any) => <BlankLayout>{page}</BlankLayout>);
 	return (
 		<CacheProvider value={emotionCache}>
-			<ThemeProvider theme={defaultTheme}>{getLayout(<Component {...pageProps} />)}</ThemeProvider>
+			<ThemeProvider theme={defaultTheme}>
+				<CssBaseline />
+				{getLayout(<Component {...pageProps} />)}
+			</ThemeProvider>
 		</CacheProvider>
 	);
 }
