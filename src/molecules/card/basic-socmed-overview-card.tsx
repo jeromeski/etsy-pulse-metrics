@@ -61,7 +61,7 @@ const BasicSocMedOverviewCard = () => {
 						fontWeight: "900",
 						color: "#6E6E6E",
 						letterSpacing: "1px",
-						marginBottom: "2rem"
+						marginBottom: "1.5rem"
 					}}>
 					Social Media Followers
 				</Typography>

@@ -5,7 +5,7 @@ import BasicSocMedOverviewCard from "@/molecules/card/basic-socmed-overview-card
 
 const Home = () => {
 	return (
-		<Grid container>
+		<Grid container sx={{ padding: "2rem" }}>
 			<Grid item xs={6}>
 				<BasicMetricsCardList />
 			</Grid>

@@ -1,7 +1,7 @@
 // **MUI Imports
 // **React Imports
 import React from "react";
-import { Box } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 // **Custom Components Imports
 import BasicMetricsCard from "@/molecules/card/basic-metrics-card";
 // **Data Imports
@@ -9,13 +9,7 @@ import { SIMPLE_SOCMED_CARD_METRICS } from "@/data";
 
 const BasicMetricsCardList = () => {
 	return (
-		<Box
-			sx={{
-				display: "flex",
-				justifyContent: "space-around",
-				alignItems: "center",
-				flexWrap: "wrap"
-			}}>
+		<Grid container spacing={3}>
 			{SIMPLE_SOCMED_CARD_METRICS.map((item) => (
 				<BasicMetricsCard
 					key={item.id}
@@ -25,7 +19,7 @@ const BasicMetricsCardList = () => {
 					likesComparisonDays={item.likesComparisonDays}
 				/>
 			))}
-		</Box>
+		</Grid>
 	);
 };
 
