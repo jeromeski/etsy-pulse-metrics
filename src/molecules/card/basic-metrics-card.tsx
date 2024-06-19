@@ -1,6 +1,6 @@
 // **Mui Imports
 import { styled } from "@mui/material/styles";
-import { Card, Box, Theme, Typography } from "@mui/material";
+import { Card, Box, Typography } from "@mui/material";
 import { TrendingDown, TrendingUp } from "@mui/icons-material";
 
 interface BasicMetricCardsProps {
