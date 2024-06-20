@@ -25,6 +25,8 @@ import "@/styles/reset.css";
 import ThemeComponent from 'src/@core/theme/ThemeComponent'
 import themeConfig from 'src/configs/themeConfig'
 
+import { ThemeColor, Settings } from 'src/@core/theme/ThemeComponent'
+
 const clientSideEmotionCache = createEmotionCache()
 
 type ExtendedAppProps = AppProps & {
@@ -36,7 +38,7 @@ type ExtendedAppProps = AppProps & {
 
 const themeConfigMode = themeConfig.mode
 
-const themeSettings = {
+const themeSettings: Settings = {
   themeColor: 'primary',
   themeConfig: themeConfig,
   mode: themeConfigMode

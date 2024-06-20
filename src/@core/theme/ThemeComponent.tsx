@@ -7,13 +7,13 @@ import { Theme } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 import GlobalStyles from '@mui/material/GlobalStyles'
 import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material/styles'
-import { PaletteMode, Direction } from '@mui/material'
+import { PaletteMode } from '@mui/material'
 
 // ** Type Imports
 // import { Settings } from 'src/@core/context/settingsContext'
 
 // ** Theme Config
-import themeConfig from 'src/configs/themeConfig'
+import themeConfig, { ThemeConfig } from 'src/configs/themeConfig'
 
 // ** Direction component for LTR or RTL
 // import Direction from 'src/layouts/components/Direction'
@@ -29,11 +29,12 @@ import themeOptions from './ThemeOptions'
 // ** Global Styles
 import GlobalStyling from './globalStyles'
 
-type ThemeColor = 'success' | 'error' | 'primary' | 'secondary' | 'warning' | 'info'
+export type ThemeColor = 'success' | 'error' | 'primary' | 'secondary' | 'warning' | 'info'
 
-type Settings = {
+export type Settings = {
   mode: PaletteMode
   themeColor: ThemeColor
+  themeConfig: ThemeConfig
 }
 
 interface Props {
@@ -70,11 +71,9 @@ const ThemeComponent = (props: Props) => {
 
   return (
     <ThemeProvider theme={theme}>
-      {/* <Direction direction={settings.direction}> */}
       <CssBaseline />
       <GlobalStyles styles={() => GlobalStyling(theme, settings) as any} />
       {children}
-      {/* </Direction> */}
     </ThemeProvider>
   )
 }
