@@ -1,8 +1,12 @@
 // ** Type Imports
 import { PaletteMode } from '@mui/material'
-import { Skin, ThemeColor } from 'src/@core/layouts/types'
+import { ThemeColor } from 'src/@core/layouts/types'
 
-const DefaultPalette = (mode: PaletteMode, skin: Skin, themeColor: ThemeColor) => {
+const DefaultPalette = (
+  mode: PaletteMode,
+  // skin: Skin,
+  themeColor: ThemeColor
+) => {
   // ** Vars
   const lightColor = '58, 53, 65'
   const darkColor = '231, 227, 252'
@@ -25,13 +29,11 @@ const DefaultPalette = (mode: PaletteMode, skin: Skin, themeColor: ThemeColor) =
   }
 
   const defaultBgColor = () => {
-    if (skin === 'bordered' && mode === 'light') {
+    if (mode === 'light') {
       return '#FFF'
-    } else if (skin === 'bordered' && mode === 'dark') {
+    } else if (mode === 'dark') {
       return '#312D4B'
-    } else if (mode === 'light') {
-      return '#F4F5FA'
-    } else return '#28243D'
+    }
   }
 
   return {

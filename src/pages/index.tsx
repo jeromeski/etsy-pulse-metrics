@@ -1,9 +1,9 @@
 // **Mui Imports
 import { Grid, Box } from '@mui/material'
-import BasicMetricsCardList from '@/views/social-media/BasicMetricsCardList'
-import BasicSocMedOverviewCard from '@/molecules/card/basic-socmed-overview-card'
-// import RechartsAreaChart from '@/molecules/charts/react-charts'
-import BasicSocMedAreaChart from '@/views/social-media/BasicSocMedAreaChart'
+import BasicMetricsCardList from 'src/views/social-media/BasicMetricsCardList'
+import BasicSocMedOverviewCard from 'src/molecules/card/basic-socmed-overview-card'
+// import RechartsAreaChart from 'src/molecules/charts/react-charts'
+import BasicSocMedAreaChart from 'src/views/social-media/BasicSocMedAreaChart'
 
 const Home = () => {
   return (

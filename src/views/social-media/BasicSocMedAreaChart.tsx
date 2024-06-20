@@ -22,7 +22,7 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import Circle from 'mdi-material-ui/Circle'
 
 // import { DateType } from "src/types/forms/reactDatepickerTypes";
-import { SIMPLE_SOCMED_FB_DATA_90 } from '@/data'
+import { SIMPLE_SOCMED_FB_DATA_90 } from 'src/data'
 import { darken } from '@mui/system'
 
 interface Props {

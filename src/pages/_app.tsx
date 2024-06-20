@@ -6,11 +6,8 @@ import type { AppProps } from "next/app";
 import { NextPage } from "next";
 
 // **Mui Imports
-import { ThemeProvider } from "@mui/material";
-import CssBaseline from "@mui/material/CssBaseline";
 
 // **Custom Imports
-// import defaultTheme from "@/theme";
 
 // **Vendor Imports
 import type { EmotionCache } from "@emotion/cache";
@@ -25,7 +22,7 @@ import "@/styles/reset.css";
 import ThemeComponent from 'src/@core/theme/ThemeComponent'
 import themeConfig from 'src/configs/themeConfig'
 
-import { ThemeColor, Settings } from 'src/@core/theme/ThemeComponent'
+import { Settings } from 'src/@core/theme/ThemeComponent'
 
 const clientSideEmotionCache = createEmotionCache()
 

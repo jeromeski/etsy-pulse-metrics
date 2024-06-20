@@ -37,12 +37,12 @@ export type Settings = {
   themeConfig: ThemeConfig
 }
 
-interface Props {
+interface ThemeComponentProps {
   settings: Settings
   children: ReactNode
 }
 
-const ThemeComponent = (props: Props) => {
+const ThemeComponent = (props: ThemeComponentProps) => {
   // ** Props
   const { settings, children } = props
 

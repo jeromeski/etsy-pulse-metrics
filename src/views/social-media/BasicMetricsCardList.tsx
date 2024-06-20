@@ -3,9 +3,9 @@
 import React from "react";
 import { Box, Grid } from "@mui/material";
 // **Custom Components Imports
-import BasicMetricsCard from "@/molecules/card/basic-metrics-card";
+import BasicMetricsCard from 'src/molecules/card/basic-metrics-card'
 // **Data Imports
-import { SIMPLE_SOCMED_CARD_METRICS } from "@/data";
+import { SIMPLE_SOCMED_CARD_METRICS } from 'src/data'
 
 const BasicMetricsCardList = () => {
 	return (
