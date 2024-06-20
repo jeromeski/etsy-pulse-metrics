@@ -1,15 +1,15 @@
 // **Mui Imports
-import { Grid } from '@mui/material'
+import { Grid, Box } from '@mui/material'
 import BasicMetricsCardList from '@/views/social-media/BasicMetricsCardList'
 import BasicSocMedOverviewCard from '@/molecules/card/basic-socmed-overview-card'
 // import RechartsAreaChart from '@/molecules/charts/react-charts'
-import BasicLineAreaChart from './../views/social-media/BasicLineAreaChart'
+import BasicSocMedAreaChart from '@/views/social-media/BasicSocMedAreaChart'
 
 const Home = () => {
   return (
     <Grid container>
-      <Grid item xs={12} sm={3} md={4}>
-        <BasicLineAreaChart direction='ltr' />
+      <Grid item xs={12} md={9}>
+        <BasicSocMedAreaChart direction='ltr' />
       </Grid>
     </Grid>
     // <Grid container spacing={3}>

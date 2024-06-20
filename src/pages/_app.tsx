@@ -10,40 +10,43 @@ import { ThemeProvider } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 
 // **Custom Imports
-import defaultTheme from "@/theme";
+// import defaultTheme from "@/theme";
 
 // **Vendor Imports
 import type { EmotionCache } from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
 
 // **Utils Imports
-import { createEmotionCache } from "@/utils/createEmotionCache";
-import BlankLayout from "@/templates/blank-layout";
+import { createEmotionCache } from 'src/@core/utils/create-emotion-cache'
+import BlankLayout from 'src/templates/blank-layout'
 
 // **Global Styles Imports
 import "@/styles/reset.css";
+import ThemeComponent from 'src/@core/theme/ThemeComponent'
+import themeConfig from 'src/configs/themeConfig'
 
-const clientSideEmotionCache = createEmotionCache();
+const clientSideEmotionCache = createEmotionCache()
 
 type ExtendedAppProps = AppProps & {
-	Component: NextPage & {
-		getLayout?: (page: ReactElement) => ReactNode;
-	};
-	emotionCache: EmotionCache;
-};
+  Component: NextPage & {
+    getLayout?: (page: ReactElement) => ReactNode
+  }
+  emotionCache: EmotionCache
+}
 
-export default function App({
-	Component,
-	emotionCache = clientSideEmotionCache,
-	pageProps
-}: ExtendedAppProps) {
-	const getLayout = Component.getLayout ?? ((page: any) => <BlankLayout>{page}</BlankLayout>);
-	return (
-		<CacheProvider value={emotionCache}>
-			<ThemeProvider theme={defaultTheme}>
-				<CssBaseline />
-				{getLayout(<Component {...pageProps} />)}
-			</ThemeProvider>
-		</CacheProvider>
-	);
+const themeConfigMode = themeConfig.mode
+
+const themeSettings = {
+  themeColor: 'primary',
+  themeConfig: themeConfig,
+  mode: themeConfigMode
+}
+
+export default function App({ Component, emotionCache = clientSideEmotionCache, pageProps }: ExtendedAppProps) {
+  const getLayout = Component.getLayout ?? ((page: any) => <BlankLayout>{page}</BlankLayout>)
+  return (
+    <CacheProvider value={emotionCache}>
+      <ThemeComponent settings={themeSettings}>{getLayout(<Component {...pageProps} />)}</ThemeComponent>
+    </CacheProvider>
+  )
 }
