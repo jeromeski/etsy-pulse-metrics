@@ -2,24 +2,15 @@
 import { useState, useEffect, useCallback } from 'react'
 
 // ** MUI Imports
-import Box from '@mui/material/Box'
-import Card from '@mui/material/Card'
-import Divider from '@mui/material/Divider'
-import CardHeader from '@mui/material/CardHeader'
-import Typography from '@mui/material/Typography'
-import CardContent from '@mui/material/CardContent'
 import { styled } from '@mui/material/styles'
-import { useMediaQuery, Theme } from '@mui/material'
-
-import Select from '@mui/material/Select'
-import MenuItem from '@mui/material/MenuItem'
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
+import {Theme, Select, MenuItem, Box, Card, Divider, Typography, CardContent} from '@mui/material'
 
 // ** Third Party Imports
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, TooltipProps } from 'recharts'
 
 // ** Icons Imports
 import Circle from 'mdi-material-ui/Circle'
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
 
 // ** Data Imports
 import { SIMPLE_SOCMED_FB_DATA_90 } from 'src/data'
@@ -61,18 +52,34 @@ const CustomTooltip = (data: TooltipProps<any, any>) => {
   return null
 }
 
-const StyledSelect = styled(Select)(({ theme }: { theme: Theme }) => ({
+const CardAreaChartSelect = styled(Select)(({ theme }: { theme: Theme }) => ({
   fontSize: '.9rem',
-  marginRight: '.45rem !important',
+  marginRight: '.45rem',
   height: '2rem',
   '& div': {
     display: 'flex',
     alignItems: 'center'
   },
-  [theme.breakpoints.up('sm')]: {
-    // marginLeft: '.25rem'
-    marginTop: 0,
-    paddingTop: 0
+  [theme.breakpoints.between('sm', 'lg')]: {
+    marginRight: 0
+  }
+}))
+
+const CardAreaChartLegend = styled(Box)(({ theme }: { theme: Theme }) => ({
+  display: 'flex',
+  justifyContent: 'flex-end',
+  alignItems: 'center',
+  marginBottom: '.5rem'
+}))
+
+const CardAreaChartHeader = styled(Box)(({ theme }: { theme: Theme }) => ({
+  padding: '1rem 1.5rem 0 1.5rem',
+  display: 'flex',
+  flexDirection: 'column',
+  [theme.breakpoints.between('sm', 'xl')]: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   }
 }))
 
@@ -83,15 +90,7 @@ const BasicSocMedAreaChart = ({ direction }: Props) => {
   const [chartData, setChartData] = useState<any[]>([])
   const [dayRange, setDayRange] = useState<string>(initDayRange)
   // ** Hooks
-  const {
-    isXtraSmallScreen,
-    isSmallScreen,
-    isMediumScreen,
-    isTabletScreen,
-    isSmallLaptopScreen,
-    isLaptopScreen,
-    isDesktopScreen
-  } = useDeviceSizesMediaQuery()
+  const { isMobileXs, isMobileS, isMobileM, isTablet, isLaptopS, isLaptopL, isDesktop } = useDeviceSizesMediaQuery()
 
   const handleChange: any = (event: any) => {
     console.log(event.target.value)
@@ -131,99 +130,76 @@ const BasicSocMedAreaChart = ({ direction }: Props) => {
 
   return (
     <Card sx={{ margin: '1rem', maxWidth: '700px' }}>
-      <CardHeader
-        title={
-          dayRange === '90'
-            ? 'Facebook Daily Reach (90 days)'
-            : dayRange === '60'
-            ? 'Facebook Daily Reach (60 days)'
-            : 'Facebook Daily Reach (30 days)'
-        }
-        titleTypographyProps={{ variant: 'h4' }}
-        action={
-          <StyledSelect value={dayRange} onChange={handleChange} displayEmpty>
+      <CardAreaChartHeader>
+        <Box
+          sx={(theme: Theme) => ({
+            marginBottom: '1rem'
+          })}
+        >
+          <Typography
+            variant='h1'
+            sx={(theme: Theme) => ({
+              fontSize: {
+                xs: '.95rem',
+                sm: '1rem',
+                md: '1.10rem',
+                lg: '1.15rem'
+              },
+              fontWeight: '700',
+              letterSpacing: '.2px'
+            })}
+          >
+            {dayRange === '90'
+              ? 'Facebook Daily Reach (90 days)'
+              : dayRange === '60'
+              ? 'Facebook Daily Reach (60 days)'
+              : 'Facebook Daily Reach (30 days)'}
+          </Typography>
+        </Box>
+        <Box>
+          <CardAreaChartSelect value={dayRange} onChange={handleChange} displayEmpty>
             <MenuItem value='90'>
               <CalendarTodayIcon
                 sx={{
                   marginRight: '1rem',
-                  fontSize: isXtraSmallScreen || isSmallScreen ? '1rem' : '1.25rem'
+                  fontSize: isMobileXs || isMobileS ? '1rem' : '1.25rem'
                 }}
               />
               Last 90 days
             </MenuItem>
             <MenuItem value='60'>
               {' '}
-              <CalendarTodayIcon
-                sx={{ marginRight: '1rem', fontSize: isXtraSmallScreen || isSmallScreen ? '1rem' : '1.25rem' }}
-              />
+              <CalendarTodayIcon sx={{ marginRight: '1rem', fontSize: isMobileXs || isMobileS ? '1rem' : '1.25rem' }} />
               Last 60 days
             </MenuItem>
             <MenuItem value='30'>
               {' '}
-              <CalendarTodayIcon
-                sx={{ marginRight: '1rem', fontSize: isXtraSmallScreen || isSmallScreen ? '1rem' : '1.25rem' }}
-              />
+              <CalendarTodayIcon sx={{ marginRight: '1rem', fontSize: isMobileXs || isMobileS ? '1rem' : '1.25rem' }} />
               Last 30 days
             </MenuItem>
-            {/* Add more menu items as needed */}
-          </StyledSelect>
-        }
-        sx={(theme: Theme) => ({
-          paddingBottom: 0,
-          flexDirection: isXtraSmallScreen || isSmallScreen || isMediumScreen ? 'column' : 'row',
-          alignItems: isTabletScreen || isLaptopScreen || isDesktopScreen ? 'flex-end' : 'flex-start',
-          // alignItems: ['flex-start', 'center'],
-          '& .MuiCardHeader-action': {
-            marginTop: isMediumScreen || isTabletScreen || isLaptopScreen || isDesktopScreen ? 0 : '.1rem',
-            marginBottom: isMediumScreen || isTabletScreen || isLaptopScreen || isDesktopScreen ? 0 : '.5rem',
-            paddingTop: isMediumScreen || isTabletScreen || isLaptopScreen || isDesktopScreen ? 0 : '.5rem',
-            backgroundColor: 'lightblue'
-          },
-          '& .MuiCardHeader-content': {
-            marginBottom: [1, 0],
-            paddingBottom: 0,
-            display: 'flex',
-            flexDirection: isXtraSmallScreen || isSmallScreen || isMediumScreen ? 'column' : 'row',
-            alignItems: isTabletScreen || isLaptopScreen || isDesktopScreen ? 'flex-end' : 'flex-start'
-          },
-          '& .MuiCardHeader-content > .MuiCardHeader-title	': {
-            color: theme.palette.grey['A400'],
-            fontWeight: '700',
-            fontSize: isXtraSmallScreen || isSmallScreen || isMediumScreen ? '.9rem' : '1rem',
-            marginBottom: isXtraSmallScreen || isSmallScreen || isMediumScreen ? 0 : '.5rem'
-          }
-        })}
-      />
+          </CardAreaChartSelect>
+        </Box>
+      </CardAreaChartHeader>
       <CardContent>
         {/* Reach */}
-        <Box
-          sx={{
-            marginRight: 4,
-            width: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: isXtraSmallScreen || isSmallScreen || isMediumScreen ? 'flex-end' : 'flex-start',
-            marginBottom: '1rem'
-          }}
-        >
+        <CardAreaChartLegend>
           <Circle
-            sx={{
-              marginRight: 1,
-              fontSize: isXtraSmallScreen || isSmallScreen ? '1rem' : '1.25rem',
-              color: 'rgb(0,51,187, .75)'
-            }}
+            sx={(theme: Theme) => ({
+              color: theme.palette.primary.main,
+              height: 'auto',
+              width: '15px',
+              marginRight: '5px'
+            })}
           />
           <Typography
             variant='body1'
-            sx={theme => ({
-              color: theme.palette.grey['A400'],
-              fontWeight: '700',
-              fontSize: isXtraSmallScreen || isSmallScreen || isMediumScreen ? '.9rem' : '1rem'
+            sx={(theme: Theme) => ({
+              fontSize: '.9rem'
             })}
           >
-            Reach
+            <b>Reach</b>
           </Typography>
-        </Box>
+        </CardAreaChartLegend>
         {/* Area Chart */}
         <Box sx={{ height: '250px', width: '100%' }}>
           <ResponsiveContainer height='100%' width='100%'>
@@ -232,15 +208,20 @@ const BasicSocMedAreaChart = ({ direction }: Props) => {
               <XAxis
                 dataKey='date'
                 reversed={direction === 'rtl'}
-                tickCount={isLaptopScreen ? 9 : isMediumScreen ? 7 : 3}
+                tickCount={isLaptopS ? 9 : isTablet ? 7 : 3}
                 tick={props => {
                   return <ControlledChartAxisTick x={props.x} y={props.y} payload={props.payload} rotation={-45} />
+                }}
+                style={{
+                  fontSize: isMobileXs || isMobileS || isMobileM || isTablet ? '.9rem' : '1rem'
                 }}
               />
               <YAxis
                 tickCount={4}
                 orientation={direction === 'rtl' ? 'right' : 'left'}
-                style={{ fontSize: isXtraSmallScreen ? '.8rem' : isSmallScreen ? '.9rem' : '1rem' }}
+                style={{
+                  fontSize: isMobileXs || isMobileS || isMobileM || isTablet ? '.9rem' : '1rem'
+                }}
               />
               <Tooltip content={CustomTooltip} />
               <Area
