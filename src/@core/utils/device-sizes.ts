@@ -1,4 +1,5 @@
 export const sizes = {
+  mobileXs: '0',
   mobileS: '320px',
   mobileM: '375px',
   mobileL: '425px',
@@ -9,6 +10,7 @@ export const sizes = {
 }
 
 export const devicesMinWidth = {
+  mobileXs: `(min-width: ${sizes.mobileXs})`,
   mobileS: `(min-width: ${sizes.mobileS})`,
   mobileM: `(min-width: ${sizes.mobileM})`,
   mobileL: `(min-width: ${sizes.mobileL})`,

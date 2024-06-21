@@ -16,6 +16,6 @@
       "src/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/@core/components/controlled-chart-select"],
   "exclude": ["node_modules"]
 }

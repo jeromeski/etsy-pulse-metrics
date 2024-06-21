@@ -21,19 +21,17 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 // ** Icons Imports
 import Circle from 'mdi-material-ui/Circle'
 
-// import { DateType } from "src/types/forms/reactDatepickerTypes";
+// ** Data Imports
 import { SIMPLE_SOCMED_FB_DATA_90 } from 'src/data'
-import { darken } from '@mui/system'
+
+// ** Custom Component Imports
+import ControlledChartAxisTick from 'src/@core/components/controlled-chart-axis-tick'
+
+// ** Hooks
+import useDeviceSizesMediaQuery from 'src/hooks/useDeviceSizesMediaQuery'
 
 interface Props {
   direction: 'ltr' | 'rtl'
-}
-interface CustomXAxisTickProps {
-  x: number
-  y: number
-  payload: {
-    value: string
-  }
 }
 
 const CustomTooltip = (data: TooltipProps<any, any>) => {
@@ -63,63 +61,37 @@ const CustomTooltip = (data: TooltipProps<any, any>) => {
   return null
 }
 
-const CustomXAxisTick = ({ x, y, payload }: CustomXAxisTickProps) => {
-  // Determine the rotation angle (e.g., 270 degrees for vertical labels)
-  const rotation = -45
-  const cx = x
-  const cy = y
-
-  return (
-    <text x={cx} y={cy} transform={`rotate(${rotation} ${cx} ${cy} )`} textAnchor='middle'>
-      {payload.value}
-    </text>
-  )
-}
-
 const StyledSelect = styled(Select)(({ theme }: { theme: Theme }) => ({
+  fontSize: '.9rem',
   marginRight: '.45rem !important',
-  marginTop: '.5rem !important',
   height: '2rem',
   '& div': {
     display: 'flex',
     alignItems: 'center'
   },
-  [theme.breakpoints.between('xs', 'sm')]: {
+  [theme.breakpoints.up('sm')]: {
     // marginLeft: '.25rem'
+    marginTop: 0,
+    paddingTop: 0
   }
 }))
 
 const initDayRange: string = '90'
 
-const StyledCardHeader = styled(CardHeader)(({ theme }: { theme: Theme }) => ({
-  paddingBottom: 0,
-  flexDirection: 'column',
-  alignItems: 'flex-start',
-
-  // alignItems: ['flex-start', 'center'],
-  '& .MuiCardHeader-action': { marginBottom: 0 },
-  '& .MuiCardHeader-content': {
-    marginBottom: [1, 0],
-    paddingBottom: 0,
-    display: 'flex'
-  },
-  '& .MuiCardHeader-content > .MuiCardHeader-title	': {
-    color: `${darken(theme.palette.grey[900], 0.5)}`,
-    fontWeight: '700',
-    fontSize: '1rem !important',
-    marginBottom: '.5rem'
-  }
-}))
-
 const BasicSocMedAreaChart = ({ direction }: Props) => {
   // ** States
   const [chartData, setChartData] = useState<any[]>([])
   const [dayRange, setDayRange] = useState<string>(initDayRange)
-
-  const isLargeScreen = useMediaQuery('min-width: 1200px')
-  const isMediumScreen = useMediaQuery('min-width: 900px')
-  const isSmallScreen = useMediaQuery('(min-width: 376px) and (max-width: 600px)')
-  const isXtraSmallScreen = useMediaQuery('(min-width: 0) and (max-width: 375px)')
+  // ** Hooks
+  const {
+    isXtraSmallScreen,
+    isSmallScreen,
+    isMediumScreen,
+    isTabletScreen,
+    isSmallLaptopScreen,
+    isLaptopScreen,
+    isDesktopScreen
+  } = useDeviceSizesMediaQuery()
 
   const handleChange: any = (event: any) => {
     console.log(event.target.value)
@@ -159,7 +131,7 @@ const BasicSocMedAreaChart = ({ direction }: Props) => {
 
   return (
     <Card sx={{ margin: '1rem', maxWidth: '700px' }}>
-      <StyledCardHeader
+      <CardHeader
         title={
           dayRange === '90'
             ? 'Facebook Daily Reach (90 days)'
@@ -196,38 +168,63 @@ const BasicSocMedAreaChart = ({ direction }: Props) => {
             {/* Add more menu items as needed */}
           </StyledSelect>
         }
+        sx={(theme: Theme) => ({
+          paddingBottom: 0,
+          flexDirection: isXtraSmallScreen || isSmallScreen || isMediumScreen ? 'column' : 'row',
+          alignItems: isTabletScreen || isLaptopScreen || isDesktopScreen ? 'flex-end' : 'flex-start',
+          // alignItems: ['flex-start', 'center'],
+          '& .MuiCardHeader-action': {
+            marginTop: isMediumScreen || isTabletScreen || isLaptopScreen || isDesktopScreen ? 0 : '.1rem',
+            marginBottom: isMediumScreen || isTabletScreen || isLaptopScreen || isDesktopScreen ? 0 : '.5rem',
+            paddingTop: isMediumScreen || isTabletScreen || isLaptopScreen || isDesktopScreen ? 0 : '.5rem',
+            backgroundColor: 'lightblue'
+          },
+          '& .MuiCardHeader-content': {
+            marginBottom: [1, 0],
+            paddingBottom: 0,
+            display: 'flex',
+            flexDirection: isXtraSmallScreen || isSmallScreen || isMediumScreen ? 'column' : 'row',
+            alignItems: isTabletScreen || isLaptopScreen || isDesktopScreen ? 'flex-end' : 'flex-start'
+          },
+          '& .MuiCardHeader-content > .MuiCardHeader-title	': {
+            color: theme.palette.grey['A400'],
+            fontWeight: '700',
+            fontSize: isXtraSmallScreen || isSmallScreen || isMediumScreen ? '.9rem' : '1rem',
+            marginBottom: isXtraSmallScreen || isSmallScreen || isMediumScreen ? 0 : '.5rem'
+          }
+        })}
       />
       <CardContent>
-        <Box>
-          <Box
+        {/* Reach */}
+        <Box
+          sx={{
+            marginRight: 4,
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: isXtraSmallScreen || isSmallScreen || isMediumScreen ? 'flex-end' : 'flex-start',
+            marginBottom: '1rem'
+          }}
+        >
+          <Circle
             sx={{
-              marginRight: 4,
-              width: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-              marginBottom: '1rem'
+              marginRight: 1,
+              fontSize: isXtraSmallScreen || isSmallScreen ? '1rem' : '1.25rem',
+              color: 'rgb(0,51,187, .75)'
             }}
+          />
+          <Typography
+            variant='body1'
+            sx={theme => ({
+              color: theme.palette.grey['A400'],
+              fontWeight: '700',
+              fontSize: isXtraSmallScreen || isSmallScreen || isMediumScreen ? '.9rem' : '1rem'
+            })}
           >
-            <Circle
-              sx={{
-                marginRight: 1,
-                fontSize: isXtraSmallScreen || isSmallScreen ? '1rem' : '1.25rem',
-                color: 'rgb(0,51,187, .75)'
-              }}
-            />
-            <Typography
-              variant='body1'
-              sx={theme => ({
-                color: `${darken(theme.palette.grey[900], 0.5)}`,
-                fontWeight: '700',
-                fontSize: '1rem !important'
-              })}
-            >
-              Reach
-            </Typography>
-          </Box>
+            Reach
+          </Typography>
         </Box>
+        {/* Area Chart */}
         <Box sx={{ height: '250px', width: '100%' }}>
           <ResponsiveContainer height='100%' width='100%'>
             <AreaChart height={350} data={chartData} style={{ direction }} margin={{ left: -20 }}>
@@ -235,13 +232,16 @@ const BasicSocMedAreaChart = ({ direction }: Props) => {
               <XAxis
                 dataKey='date'
                 reversed={direction === 'rtl'}
-                tickCount={isLargeScreen ? 9 : isMediumScreen ? 7 : 5}
+                tickCount={isLaptopScreen ? 9 : isMediumScreen ? 7 : 3}
                 tick={props => {
-                  console.log(props)
-                  return <CustomXAxisTick x={props.x} y={props.y} payload={props.payload} />
+                  return <ControlledChartAxisTick x={props.x} y={props.y} payload={props.payload} rotation={-45} />
                 }}
               />
-              <YAxis tickCount={4} orientation={direction === 'rtl' ? 'right' : 'left'} />
+              <YAxis
+                tickCount={4}
+                orientation={direction === 'rtl' ? 'right' : 'left'}
+                style={{ fontSize: isXtraSmallScreen ? '.8rem' : isSmallScreen ? '.9rem' : '1rem' }}
+              />
               <Tooltip content={CustomTooltip} />
               <Area
                 type='linear'
