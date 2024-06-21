@@ -1,89 +1,59 @@
 // **Mui Imports
-import { Select, styled, Theme, MenuItem, SelectProps } from '@mui/material'
+import { Select, MenuItem, SelectProps, SelectChangeEvent } from '@mui/material'
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
 
-// **Utility Component Imports
-import withUseMediaQuery from 'src/@core/components/with-use-media-query'
-import { SelectChangeEvent } from '@mui/material/Select'
-
-interface ControlledChartSelectType {
+interface RenderOptionProp {
+  id?: string
   value: string
-  handleChange: (event: SelectChangeEvent<any>) => void
-  renderSelectItem: (item: any, index: number) => JSX.Element
-  compareDaysSelectList: any[]
+  label: string
 }
 
-const StyledSelect = styled(Select)<SelectProps>(({ theme }: { theme: Theme }) => ({
-  fontSize: '.9rem',
-  marginRight: '.45rem !important',
-  marginTop: '.5rem !important',
-  height: '2rem',
-  '& div': {
-    display: 'flex',
-    alignItems: 'center'
-  },
-  [theme.breakpoints.between('xs', 'sm')]: {
-    // marginLeft: '.25rem'
-  }
-}))
+type RenderProp = (options: RenderOptionProp[]) => React.ReactNode
+
+interface ControlledChartSelectType extends Omit<SelectProps<string>, 'children' | 'onChange'> {
+  options: RenderOptionProp[]
+  onChange: (event: SelectChangeEvent<string>) => void
+  renderOptions: RenderProp
+  placeholder?: string
+}
 
 const ControlledChartSelect = ({
+  renderOptions,
   value,
-  handleChange,
-  renderSelectItem,
-  compareDaysSelectList
+  placeholder,
+  options,
+  ...selectProps
 }: ControlledChartSelectType) => {
   return (
-    <StyledSelect value={value} onChange={handleChange} displayEmpty>
-      {compareDaysSelectList.map((item: string, idx: number) => renderSelectItem(item, idx))}
-    </StyledSelect>
+    <Select
+      value={value === '' ? '' : value}
+      displayEmpty
+      {...selectProps}
+      sx={{
+        height: '2rem',
+        '& .MuiSelect-select': {
+          display: 'flex',
+          alignItems: 'center'
+        }
+      }}
+    >
+      {placeholder && (
+        <MenuItem value='' disabled={!!value} sx={{ display: 'flex', alignItems: 'center' }}>
+          <CalendarTodayIcon
+            sx={theme => ({
+              marginRight: '1rem',
+              fontSize: '1rem',
+              [theme.breakpoints.up('md')]: {
+                fontSize: '1.25rem'
+              }
+            })}
+          />
+          {placeholder}
+        </MenuItem>
+      )}
+      {renderOptions(options)}
+    </Select>
   )
 }
 
-export default withUseMediaQuery(ControlledChartSelect)
-
-/*
-<MenuItem value='90'>
-        <CalendarTodayIcon
-          sx={{
-            marginRight: '1rem',
-            fontSize: isXtraSmallScreen || isSmallScreen ? '1rem' : '1.25rem'
-          }}
-        />
-        Last 90 days
-      </MenuItem>
-      <MenuItem value='60'>
-        {' '}
-        <CalendarTodayIcon
-          sx={{ marginRight: '1rem', fontSize: isXtraSmallScreen || isSmallScreen ? '1rem' : '1.25rem' }}
-        />
-        Last 60 days
-      </MenuItem>
-      <MenuItem value='30'>
-        {' '}
-        <CalendarTodayIcon
-          sx={{ marginRight: '1rem', fontSize: isXtraSmallScreen || isSmallScreen ? '1rem' : '1.25rem' }}
-        />
-        Last 30 days
-      </MenuItem>
-
-<ControlledChartSelect
-            value={dayRange}
-            onChange={(e: SelectChangeEvent) => handleChange(e)}
-            compareDaysSelectList={compareDaysSelectList}
-            
-            renderSelectItem={(item: CompareDaysSelectItem) => (
-              <MenuItem value={item.value} key={item.id}>
-                <CalendarTodayIcon
-                  sx={{
-                    marginRight: '1rem',
-                    fontSize: isXtraSmallScreen || isSmallScreen ? '1rem' : '1.25rem'
-                  }}
-                />
-                {item.description}
-              </MenuItem>
-            )}
-          />
-
-      
-*/
+export default ControlledChartSelect

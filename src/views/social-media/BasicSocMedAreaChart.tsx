@@ -1,9 +1,9 @@
 // ** React Imports
-import { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 
 // ** MUI Imports
 import { styled } from '@mui/material/styles'
-import {Theme, Select, MenuItem, Box, Card, Divider, Typography, CardContent} from '@mui/material'
+import { Theme, Select, MenuItem, Box, Card, Divider, Typography, CardContent, SelectChangeEvent } from '@mui/material'
 
 // ** Third Party Imports
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, TooltipProps } from 'recharts'
@@ -20,6 +20,16 @@ import ControlledChartAxisTick from 'src/@core/components/controlled-chart-axis-
 
 // ** Hooks
 import useDeviceSizesMediaQuery from 'src/hooks/useDeviceSizesMediaQuery'
+import ControlledChartSelect from 'src/@core/components/controlled-chart-select'
+import ControlledAreaChart from '../charts/controlled-area-chart'
+
+interface RenderOptionProp {
+  id?: string
+  value: string
+  label: string
+}
+
+type RenderProp = (options: RenderOptionProp[]) => React.ReactNode
 
 interface Props {
   direction: 'ltr' | 'rtl'
@@ -85,38 +95,52 @@ const CardAreaChartHeader = styled(Box)(({ theme }: { theme: Theme }) => ({
 
 const initDayRange: string = '90'
 
+const options: OptionProp[] = [
+  { id: '1abcde', value: '90', label: 'last 90 days', title: 'Facebook Daily Reach (90 days)' },
+  { id: '2bcdef', value: '60', label: 'last 60 days', title: 'Facebook Daily Reach (60 days)' },
+  { id: '3cdefg', value: '30', label: 'last 30 days', title: 'Facebook Daily Reach (30 days)' }
+]
+
+type OptionProp = {
+  id?: string
+  value: string
+  label: string
+  title: string
+}
+
 const BasicSocMedAreaChart = ({ direction }: Props) => {
   // ** States
   const [chartData, setChartData] = useState<any[]>([])
-  const [dayRange, setDayRange] = useState<string>(initDayRange)
+  const [selectedValue, setSelectedValue] = useState<string>(initDayRange)
   // ** Hooks
   const { isMobileXs, isMobileS, isMobileM, isTablet, isLaptopS, isLaptopL, isDesktop } = useDeviceSizesMediaQuery()
 
-  const handleChange: any = (event: any) => {
-    console.log(event.target.value)
-    if (event && event.target) {
-      setDayRange(event.target.value)
-    }
+  const getOptionTitle = (numOfDays: OptionProp[], selectedValue: string): string | undefined => {
+    const foundOption = numOfDays.find(day => day.value === selectedValue)
+    return foundOption ? foundOption.title : undefined
+  }
+
+  const handleChange = (event: SelectChangeEvent<string>) => {
+    setSelectedValue(event.target.value as string)
   }
 
   const getAreaChartData = useCallback(() => {
     try {
-      if (dayRange === '90') {
-        console.log('useEffect fired!')
+      if (selectedValue === '90') {
         setChartData(SIMPLE_SOCMED_FB_DATA_90)
       }
-      if (dayRange === '60') {
+      if (selectedValue === '60') {
         const newData60d = SIMPLE_SOCMED_FB_DATA_90.slice(0, 9)
         setChartData(newData60d)
       }
-      if (dayRange === '30') {
+      if (selectedValue === '30') {
         const newData30d = SIMPLE_SOCMED_FB_DATA_90.slice(0, 5)
         setChartData(newData30d)
       }
     } catch (error) {
       console.log(error)
     }
-  }, [dayRange])
+  }, [selectedValue])
 
   useEffect(() => {
     let isMounted = true
@@ -126,7 +150,7 @@ const BasicSocMedAreaChart = ({ direction }: Props) => {
     return () => {
       isMounted = false
     }
-  }, [dayRange])
+  }, [selectedValue])
 
   return (
     <Card sx={{ margin: '1rem', maxWidth: '700px' }}>
@@ -149,39 +173,36 @@ const BasicSocMedAreaChart = ({ direction }: Props) => {
               letterSpacing: '.2px'
             })}
           >
-            {dayRange === '90'
-              ? 'Facebook Daily Reach (90 days)'
-              : dayRange === '60'
-              ? 'Facebook Daily Reach (60 days)'
-              : 'Facebook Daily Reach (30 days)'}
+            {getOptionTitle(options, selectedValue)}
           </Typography>
         </Box>
         <Box>
-          <CardAreaChartSelect value={dayRange} onChange={handleChange} displayEmpty>
-            <MenuItem value='90'>
-              <CalendarTodayIcon
-                sx={{
-                  marginRight: '1rem',
-                  fontSize: isMobileXs || isMobileS ? '1rem' : '1.25rem'
-                }}
-              />
-              Last 90 days
-            </MenuItem>
-            <MenuItem value='60'>
-              {' '}
-              <CalendarTodayIcon sx={{ marginRight: '1rem', fontSize: isMobileXs || isMobileS ? '1rem' : '1.25rem' }} />
-              Last 60 days
-            </MenuItem>
-            <MenuItem value='30'>
-              {' '}
-              <CalendarTodayIcon sx={{ marginRight: '1rem', fontSize: isMobileXs || isMobileS ? '1rem' : '1.25rem' }} />
-              Last 30 days
-            </MenuItem>
-          </CardAreaChartSelect>
+          <ControlledChartSelect
+            placeholder='Select Option...'
+            onChange={handleChange}
+            options={options}
+            value={selectedValue}
+            renderOptions={(options: RenderOptionProp[]) =>
+              options.map(option => (
+                <MenuItem key={option.id} value={option.value}>
+                  <CalendarTodayIcon
+                    sx={(theme: Theme) => ({
+                      marginRight: '1rem',
+                      fontSize: '1rem',
+                      [theme.breakpoints.up('md')]: {
+                        fontSize: '1.25rem'
+                      }
+                    })}
+                  />
+                  {option.label}
+                </MenuItem>
+              ))
+            }
+          />
         </Box>
       </CardAreaChartHeader>
       <CardContent>
-        {/* Reach */}
+        {/* Chart Legend */}
         <CardAreaChartLegend>
           <Circle
             sx={(theme: Theme) => ({
@@ -200,8 +221,29 @@ const BasicSocMedAreaChart = ({ direction }: Props) => {
             <b>Reach</b>
           </Typography>
         </CardAreaChartLegend>
-        {/* Area Chart */}
-        <Box sx={{ height: '250px', width: '100%' }}>
+        {/* Chart Area */}
+        <ControlledAreaChart
+          chartData={chartData}
+          direction={direction === 'rtl'}
+          dataKeyXaxis='date'
+          orientation={direction === 'rtl' ? 'right' : 'left'}
+          dataKeyArea='reach'
+          stackId='reach'
+          type='linear'
+          tickCount={4}
+          stroke='#003bb3'
+          strokeWidth='3'
+          fill='rgb(0,51,187)'
+        />
+      </CardContent>
+    </Card>
+  )
+}
+
+export default BasicSocMedAreaChart
+
+/*
+<Box sx={{ height: '250px', width: '100%' }}>
           <ResponsiveContainer height='100%' width='100%'>
             <AreaChart height={350} data={chartData} style={{ direction }} margin={{ left: -20 }}>
               <CartesianGrid />
@@ -235,9 +277,4 @@ const BasicSocMedAreaChart = ({ direction }: Props) => {
             </AreaChart>
           </ResponsiveContainer>
         </Box>
-      </CardContent>
-    </Card>
-  )
-}
-
-export default BasicSocMedAreaChart
+*/
