@@ -1,11 +1,7 @@
 // **Mui Imports
 import { Box, Grid } from '@mui/material'
-// **Data Imports
-import { SIMPLE_SOCMED_CARD_METRICS } from 'src/data'
-// **Custom Component Imports
-import BasicSocMedOverviewItem from 'src/views/social-media/overview/SocMedOverviewItem'
 
-const BasicSocMedOverviewList = () => {
+const SocMedOverviewList = ({ children }: { children: React.ReactNode }) => {
   return (
     <Box>
       <Grid
@@ -17,21 +13,10 @@ const BasicSocMedOverviewList = () => {
           }
         })}
       >
-        {SIMPLE_SOCMED_CARD_METRICS ? (
-          SIMPLE_SOCMED_CARD_METRICS?.map(item => (
-            <BasicSocMedOverviewItem
-              key={item.id}
-              iconURL={item.iconURL}
-              title={item.title}
-              keyMetricValue={item.keyMetricValue}
-            />
-          ))
-        ) : (
-          <></>
-        )}
+        {children}
       </Grid>
     </Box>
   )
 }
 
-export default BasicSocMedOverviewList
+export default SocMedOverviewList

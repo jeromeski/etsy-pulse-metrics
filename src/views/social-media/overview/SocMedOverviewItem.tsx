@@ -13,7 +13,7 @@ const StyledImage = styled('img')({
   width: '50px'
 })
 
-const BasicSocMedOverviewItem: React.FC<BasicSocMedOverviewData> = ({ iconURL, title, keyMetricValue }) => {
+const SocMedOverviewItem: React.FC<BasicSocMedOverviewData> = ({ iconURL, title, keyMetricValue }) => {
   const { isMobileXs, isMobileS, isMobileM, isTablet, isLaptopS, isLaptopL, isDesktop } = useDeviceSizesMediaQuery()
   return (
     <Grid item>
@@ -58,4 +58,4 @@ const BasicSocMedOverviewItem: React.FC<BasicSocMedOverviewData> = ({ iconURL, t
   )
 }
 
-export default BasicSocMedOverviewItem
+export default SocMedOverviewItem

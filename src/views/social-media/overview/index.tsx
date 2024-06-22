@@ -1,10 +1,41 @@
 // React Imports
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 // **Mui Imports
 import { Card, Box, Typography } from '@mui/material'
 
+// **Data Imports
+import { SIMPLE_SOCMED_CARD_METRICS } from 'src/data'
+
+// **Custom Component Imports
+import SocMedOverviewItem from 'src/views/social-media/overview/SocMedOverviewItem'
+import BasicSocMedOverviewList from './SocMedOverviewList'
+
+// **Type Imports
+interface SocMedMetricsItem {
+  id: string
+  title: string
+  keyMetricValue: string
+  growth: string
+  likesComparisonDays: string
+  iconURL: string
+}
+
 const SocMedOverviewContainer = () => {
+  const [metricsData, setMetricsData] = useState<SocMedMetricsItem[] | null>(null)
+  useEffect(() => {
+    let isMounted = true
+    try {
+      if (SIMPLE_SOCMED_CARD_METRICS) {
+        setMetricsData(SIMPLE_SOCMED_CARD_METRICS)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+    return () => {
+      isMounted = false
+    }
+  }, [])
   return (
     <Card
       sx={theme => ({
@@ -34,7 +65,18 @@ const SocMedOverviewContainer = () => {
       >
         Social Media Followers
       </Typography>
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}></Box>
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+        <BasicSocMedOverviewList>
+          {metricsData?.map((item: SocMedMetricsItem) => (
+            <SocMedOverviewItem
+              key={item.id}
+              iconURL={item.iconURL}
+              title={item.title}
+              keyMetricValue={item.keyMetricValue}
+            />
+          ))}
+        </BasicSocMedOverviewList>
+      </Box>
     </Card>
   )
 }
