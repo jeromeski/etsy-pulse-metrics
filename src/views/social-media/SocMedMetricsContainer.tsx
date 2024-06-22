@@ -10,7 +10,7 @@ import { Box } from '@mui/material'
 
 const SocMedMetricsContainer = () => {
   return (
-    <Grid container spacing={5}>
+    <Grid container>
       {SIMPLE_SOCMED_CARD_METRICS.map(item => (
         <Grid key={item.id} xs={6} sm={4} md={3} lg={2}>
           <BasicMetricsCard

@@ -19,7 +19,7 @@ const options = [
 
 const Home = () => {
   return (
-    <Grid container spacing={5}>
+    <Grid container>
       <Grid item xs={12}>
         <Box sx={{ marginBottom: '1rem' }}>
           <SocMedAreaChartContainer direction='ltr' />
