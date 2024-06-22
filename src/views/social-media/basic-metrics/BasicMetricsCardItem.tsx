@@ -1,5 +1,5 @@
 // **Mui Imports
-import { Card, Box, Typography, Grid } from '@mui/material'
+import { Card, Box, Typography } from '@mui/material'
 import { TrendingDown, TrendingUp } from '@mui/icons-material'
 
 interface BasicMetricCardsProps {
@@ -9,7 +9,7 @@ interface BasicMetricCardsProps {
   growth: string
 }
 
-const BasicMetricsCard = ({ title, keyMetricValue, likesComparisonDays, growth }: BasicMetricCardsProps) => {
+const BasicMetricsCardItem = ({ title, keyMetricValue, likesComparisonDays, growth }: BasicMetricCardsProps) => {
   return (
     <Card
       sx={theme => ({
@@ -99,4 +99,4 @@ const BasicMetricsCard = ({ title, keyMetricValue, likesComparisonDays, growth }
   )
 }
 
-export default BasicMetricsCard
+export default BasicMetricsCardItem

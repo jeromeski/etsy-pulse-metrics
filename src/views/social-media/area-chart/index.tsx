@@ -121,10 +121,15 @@ const SocMedAreaChartContainer = ({ direction }: Props) => {
               fontSize: {
                 xs: '.95rem',
                 sm: '1rem',
-                md: '1.10rem',
-                lg: '1.15rem'
+                md: '1.25rem',
+                lg: '1.25rem'
               },
-              fontWeight: '700',
+              fontWeight: {
+                xs: '700',
+                sm: '800',
+                md: '800',
+                lg: '800'
+              },
               letterSpacing: '.2px'
             })}
           >

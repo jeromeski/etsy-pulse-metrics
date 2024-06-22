@@ -17,43 +17,46 @@ const SocMedOverviewItem: React.FC<BasicSocMedOverviewData> = ({ iconURL, title,
   const { isMobileXs, isMobileS, isMobileM, isTablet, isLaptopS, isLaptopL, isDesktop } = useDeviceSizesMediaQuery()
   return (
     <Grid item>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          maxWidth: '100%',
-          margin: '.5rem 0',
-          padding: '0 1.5rem'
-        }}
-      >
-        <Box sx={{ marginBottom: '.75rem' }}>
-          <StyledImage src={iconURL} />
+      <Box sx={{}}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            maxWidth: '100%',
+            margin: '.5rem 0',
+            padding: '0 1.5rem',
+            width: '150px'
+          }}
+        >
+          <Box sx={{ marginBottom: '.75rem' }}>
+            <StyledImage src={iconURL} />
+          </Box>
+          <Box>
+            <Typography
+              variant='h4'
+              sx={theme => ({ fontWeight: '900', fontSize: '2rem', color: theme.palette.common.black })}
+            >
+              {Number(keyMetricValue).toLocaleString()}
+            </Typography>
+          </Box>
+          <Box>
+            <Typography
+              variant='body2'
+              sx={theme => ({
+                fontSize: '.75rem',
+                fontWeight: '900',
+                color: theme.palette.grey['A400'],
+                letterSpacing: '1px'
+              })}
+            >
+              {title}
+            </Typography>
+          </Box>
         </Box>
-        <Box>
-          <Typography
-            variant='h4'
-            sx={theme => ({ fontWeight: '900', fontSize: '2rem', color: theme.palette.common.black })}
-          >
-            {Number(keyMetricValue).toLocaleString()}
-          </Typography>
-        </Box>
-        <Box>
-          <Typography
-            variant='body2'
-            sx={theme => ({
-              fontSize: '.75rem',
-              fontWeight: '900',
-              color: theme.palette.grey['A400'],
-              letterSpacing: '1px'
-            })}
-          >
-            {title}
-          </Typography>
-        </Box>
+        {isMobileXs || isMobileS || isMobileM ? <Divider /> : <></>}
       </Box>
-      {isMobileXs || isMobileS || isMobileM ? <Divider /> : <></>}
     </Grid>
   )
 }

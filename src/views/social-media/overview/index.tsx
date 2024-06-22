@@ -25,12 +25,14 @@ const SocMedOverviewContainer = () => {
   const [metricsData, setMetricsData] = useState<SocMedMetricsItem[] | null>(null)
   useEffect(() => {
     let isMounted = true
-    try {
-      if (SIMPLE_SOCMED_CARD_METRICS) {
-        setMetricsData(SIMPLE_SOCMED_CARD_METRICS)
+    if (isMounted) {
+      try {
+        if (SIMPLE_SOCMED_CARD_METRICS) {
+          setMetricsData(SIMPLE_SOCMED_CARD_METRICS)
+        }
+      } catch (error) {
+        console.log(error)
       }
-    } catch (error) {
-      console.log(error)
     }
     return () => {
       isMounted = false
@@ -51,15 +53,21 @@ const SocMedOverviewContainer = () => {
       })}
     >
       <Typography
-        variant='h5'
+        variant='h1'
         sx={theme => ({
-          fontSize: '1rem',
-          fontWeight: '800',
-          color: theme.palette.grey['A400'],
           letterSpacing: '1px',
           marginBottom: '1.5rem',
-          [theme.breakpoints.up('md')]: {
-            fontSize: '1.25rem'
+          fontSize: {
+            xs: '.95rem',
+            sm: '1rem',
+            md: '1.25rem',
+            lg: '1.25rem'
+          },
+          fontWeight: {
+            xs: '700',
+            sm: '800',
+            md: '800',
+            lg: '800'
           }
         })}
       >
