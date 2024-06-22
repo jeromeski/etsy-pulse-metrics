@@ -3,10 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 
 // ** MUI Imports
 import { styled } from '@mui/material/styles'
-import { Theme, Select, MenuItem, Box, Card, Divider, Typography, CardContent, SelectChangeEvent } from '@mui/material'
-
-// ** Third Party Imports
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, TooltipProps } from 'recharts'
+import { Theme, MenuItem, Box, Card, Typography, CardContent, SelectChangeEvent } from '@mui/material'
 
 // ** Icons Imports
 import Circle from 'mdi-material-ui/Circle'
@@ -16,64 +13,22 @@ import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
 import { SIMPLE_SOCMED_FB_DATA_90 } from 'src/data'
 
 // ** Custom Component Imports
-import ControlledChartAxisTick from 'src/@core/components/controlled-chart-axis-tick'
-
-// ** Hooks
-import useDeviceSizesMediaQuery from 'src/hooks/useDeviceSizesMediaQuery'
 import ControlledChartSelect from 'src/@core/components/controlled-chart-select'
 import ControlledAreaChart from '../charts/controlled-area-chart'
 
+// ** Hook Imports
+import useDeviceSizesMediaQuery from 'src/hooks/useDeviceSizesMediaQuery'
+
+// ** Types
 interface RenderOptionProp {
   id?: string
   value: string
   label: string
 }
 
-type RenderProp = (options: RenderOptionProp[]) => React.ReactNode
-
 interface Props {
   direction: 'ltr' | 'rtl'
 }
-
-const CustomTooltip = (data: TooltipProps<any, any>) => {
-  const { active, payload } = data
-
-  if (active && payload) {
-    return (
-      <div className='recharts-custom-tooltip'>
-        <Typography>{data.label}</Typography>
-        <Divider />
-        {data &&
-          data.payload &&
-          data.payload.map((i: any) => {
-            return (
-              <Box sx={{ display: 'flex', alignItems: 'center' }} key={i.dataKey}>
-                <Circle sx={{ color: i.fill, marginRight: 2.5, fontSize: '0.6rem' }} />
-                <span>
-                  {i.dataKey} : {i.payload[i.dataKey]}
-                </span>
-              </Box>
-            )
-          })}
-      </div>
-    )
-  }
-
-  return null
-}
-
-const CardAreaChartSelect = styled(Select)(({ theme }: { theme: Theme }) => ({
-  fontSize: '.9rem',
-  marginRight: '.45rem',
-  height: '2rem',
-  '& div': {
-    display: 'flex',
-    alignItems: 'center'
-  },
-  [theme.breakpoints.between('sm', 'lg')]: {
-    marginRight: 0
-  }
-}))
 
 const CardAreaChartLegend = styled(Box)(({ theme }: { theme: Theme }) => ({
   display: 'flex',
@@ -108,7 +63,7 @@ type OptionProp = {
   title: string
 }
 
-const BasicSocMedAreaChart = ({ direction }: Props) => {
+const SocMedAreaChartContainer = ({ direction }: Props) => {
   // ** States
   const [chartData, setChartData] = useState<any[]>([])
   const [selectedValue, setSelectedValue] = useState<string>(initDayRange)
@@ -153,7 +108,7 @@ const BasicSocMedAreaChart = ({ direction }: Props) => {
   }, [selectedValue])
 
   return (
-    <Card sx={{ margin: '1rem', maxWidth: '700px' }}>
+    <Card sx={{ maxWidth: '100%' }}>
       <CardAreaChartHeader>
         <Box
           sx={(theme: Theme) => ({
@@ -240,41 +195,4 @@ const BasicSocMedAreaChart = ({ direction }: Props) => {
   )
 }
 
-export default BasicSocMedAreaChart
-
-/*
-<Box sx={{ height: '250px', width: '100%' }}>
-          <ResponsiveContainer height='100%' width='100%'>
-            <AreaChart height={350} data={chartData} style={{ direction }} margin={{ left: -20 }}>
-              <CartesianGrid />
-              <XAxis
-                dataKey='date'
-                reversed={direction === 'rtl'}
-                tickCount={isLaptopS ? 9 : isTablet ? 7 : 3}
-                tick={props => {
-                  return <ControlledChartAxisTick x={props.x} y={props.y} payload={props.payload} rotation={-45} />
-                }}
-                style={{
-                  fontSize: isMobileXs || isMobileS || isMobileM || isTablet ? '.9rem' : '1rem'
-                }}
-              />
-              <YAxis
-                tickCount={4}
-                orientation={direction === 'rtl' ? 'right' : 'left'}
-                style={{
-                  fontSize: isMobileXs || isMobileS || isMobileM || isTablet ? '.9rem' : '1rem'
-                }}
-              />
-              <Tooltip content={CustomTooltip} />
-              <Area
-                type='linear'
-                dataKey='reach'
-                stackId='reach'
-                stroke='#003bb3'
-                strokeWidth='3'
-                fill='rgb(0,51,187)'
-              />
-            </AreaChart>
-          </ResponsiveContainer>
-        </Box>
-*/
+export default React.memo(SocMedAreaChartContainer)

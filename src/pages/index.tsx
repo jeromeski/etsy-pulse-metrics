@@ -1,13 +1,9 @@
 // **Mui Imports
-import { Grid, Box, MenuItem, Theme } from '@mui/material'
-import BasicMetricsCardList from 'src/views/social-media/BasicMetricsCardList'
+import { Grid, Box } from '@mui/material'
 import BasicSocMedOverviewCard from 'src/molecules/card/basic-socmed-overview-card'
 // import RechartsAreaChart from 'src/molecules/charts/react-charts'
-import BasicSocMedAreaChart from 'src/views/social-media/BasicSocMedAreaChart'
-import { useState } from 'react'
-import ControlledChartSelect from 'src/@core/components/controlled-chart-select'
-import { SelectChangeEvent } from '@mui/material'
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
+import SocMedAreaChartContainer from 'src/views/social-media/SocMedAreaChartContainer'
+import SocMedMetricsContainer from 'src/views/social-media/SocMedMetricsContainer'
 
 interface RenderOptionProp {
   id?: string
@@ -22,15 +18,17 @@ const options = [
 ]
 
 const Home = () => {
-  const [value, setValue] = useState<string>('')
-  const handleChange = (event: SelectChangeEvent<string>) => {
-    setValue(event.target.value as string)
-  }
-
   return (
-    <Grid container>
-      <Grid item xs={12} md={9}>
-        <BasicSocMedAreaChart direction='ltr' />
+    <Grid container spacing={5}>
+      <Grid item xs={12}>
+        <Box
+        // sx={{ marginBottom: '1rem' }}
+        >
+          <SocMedAreaChartContainer direction='ltr' />
+        </Box>
+      </Grid>
+      <Grid item xs={12}>
+        <SocMedMetricsContainer />
       </Grid>
     </Grid>
     // <Grid container spacing={3}>
