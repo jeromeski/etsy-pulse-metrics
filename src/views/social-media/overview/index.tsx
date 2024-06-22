@@ -1,18 +1,10 @@
 // React Imports
-import React from "react";
+import React from 'react'
 
 // **Mui Imports
-import { Card, Box, Typography, styled, Grid, Divider } from '@mui/material'
+import { Card, Box, Typography } from '@mui/material'
 
-// **Data Imports
-import { SIMPLE_SOCMED_CARD_METRICS } from 'src/data'
-
-// **Type Imports
-import { BasicSocMedOverviewData } from 'src/types/social-media'
-import useDeviceSizesMediaQuery from 'src/hooks/useDeviceSizesMediaQuery'
-
-
-const BasicSocMedOverviewCard = () => {
+const SocMedOverviewContainer = () => {
   return (
     <Card
       sx={theme => ({
@@ -42,11 +34,9 @@ const BasicSocMedOverviewCard = () => {
       >
         Social Media Followers
       </Typography>
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
-        
-      </Box>
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}></Box>
     </Card>
   )
 }
 
-export default React.memo(BasicSocMedOverviewCard)
+export default React.memo(SocMedOverviewContainer)
