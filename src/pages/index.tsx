@@ -21,8 +21,13 @@ const Home = () => {
   return (
     <Grid container>
       <Grid item xs={12}>
-        <Box sx={{ marginBottom: '1rem' }}>
+        <Box>
           <SocMedAreaChartContainer direction='ltr' />
+        </Box>
+      </Grid>
+      <Grid item xs={12}>
+        <Box sx={{ marginBottom: '1rem' }}>
+          <BasicSocMedOverviewCard />
         </Box>
       </Grid>
       <Grid item xs={12}>
@@ -31,18 +36,6 @@ const Home = () => {
         </Box>
       </Grid>
     </Grid>
-    // <Grid container spacing={3}>
-    //   <Grid item xs={6}>
-    //     <RechartsAreaChart direction='ltr' />
-    //   </Grid>
-    //   <Grid item xs={6}>
-    //     <BasicSocMedOverviewCard />
-    //   </Grid>
-    //   <Grid item xs={7}>
-    //     <BasicMetricsCardList />
-    //   </Grid>
-    //   <Grid item xs=12> <BasicSocMedAreaChart direction='ltr' /> </Grid>
-    // </Grid>
   )
 }
 

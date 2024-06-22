@@ -14,7 +14,10 @@ const BasicMetricsCard = ({ title, keyMetricValue, likesComparisonDays, growth }
     <Card
       sx={theme => ({
         maxWidth: '100%',
-        margin: '0 1rem 1rem 1rem'
+        margin: '1rem',
+        [theme.breakpoints.between('sm', 'md')]: {
+          margin: '1rem .5rem'
+        }
       })}
     >
       <Box
@@ -29,10 +32,14 @@ const BasicMetricsCard = ({ title, keyMetricValue, likesComparisonDays, growth }
       >
         <Box sx={{ marginBottom: '2rem' }}>
           <Typography
-            variant='body1'
+            variant='h6'
             sx={theme => ({
-              fontWeight: '700',
-              color: theme.palette.text.primary
+              fontWeight: '800',
+              color: theme.palette.text.primary,
+              paddingLeft: '.5rem',
+              [theme.breakpoints.up('md')]: {
+                fontSize: '1rem'
+              }
             })}
           >
             {title}
@@ -40,13 +47,13 @@ const BasicMetricsCard = ({ title, keyMetricValue, likesComparisonDays, growth }
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Typography
-            variant='h3'
+            variant='h4'
             sx={theme => ({
               fontWeight: '900',
               color: theme.palette.common.black,
               fontSize: '2rem',
               [theme.breakpoints.between('md', 'xl')]: {
-                fontSize: '2.25rem !important'
+                fontSize: '2.5rem !important'
               },
               letterSpacing: '.5px'
             })}
@@ -60,7 +67,7 @@ const BasicMetricsCard = ({ title, keyMetricValue, likesComparisonDays, growth }
             justifyContent: 'center',
             alignItems: 'center',
             fontWeight: '700',
-            marginBottom: '2rem'
+            marginBottom: '1.5rem'
           }}
         >
           <Typography
@@ -80,8 +87,8 @@ const BasicMetricsCard = ({ title, keyMetricValue, likesComparisonDays, growth }
             sx={theme => ({
               fontWeight: '700',
               fontSize: '.9rem',
-              color: theme.palette.text.primary,
-              letterSpacing: '.1px'
+              color: theme.palette.text.primary
+              // letterSpacing: '.1px'
             })}
           >
             vs previous {likesComparisonDays} days

@@ -6,13 +6,12 @@ import { Grid } from '@mui/material'
 import BasicMetricsCard from 'src/molecules/card/basic-metrics-card'
 // **Data Imports
 import { SIMPLE_SOCMED_CARD_METRICS } from 'src/data'
-import { Box } from '@mui/material'
 
 const SocMedMetricsContainer = () => {
   return (
     <Grid container>
       {SIMPLE_SOCMED_CARD_METRICS.map(item => (
-        <Grid key={item.id} xs={6} sm={4} md={3} lg={2}>
+        <Grid key={item.id} xs={12} sm={4} md={3} lg={2}>
           <BasicMetricsCard
             title={item.title}
             keyMetricValue={item.keyMetricValue}
