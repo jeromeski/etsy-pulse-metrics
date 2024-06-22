@@ -44,7 +44,7 @@ const SocMedOverviewContainer = () => {
         padding: '1rem 1rem 2rem 1rem',
         borderRadius: '10px',
         maxWidth: '100%',
-        margin: '1rem',
+        margin: '1rem .5rem',
         [theme.breakpoints.down('sm')]: {
           display: 'flex',
           flexWrap: 'wrap',
@@ -64,10 +64,10 @@ const SocMedOverviewContainer = () => {
             lg: '1.25rem'
           },
           fontWeight: {
-            xs: '700',
-            sm: '800',
-            md: '800',
-            lg: '800'
+            xs: '800'
+            // sm: '800',
+            // md: '800',
+            // lg: '800'
           }
         })}
       >

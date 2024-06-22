@@ -108,7 +108,7 @@ const SocMedAreaChartContainer = ({ direction }: Props) => {
   }, [selectedValue])
 
   return (
-    <Card sx={{ maxWidth: '100%', margin: '1rem' }}>
+    <Card sx={{ maxWidth: '100%', margin: '1rem .5rem' }}>
       <CardAreaChartHeader>
         <Box
           sx={(theme: Theme) => ({

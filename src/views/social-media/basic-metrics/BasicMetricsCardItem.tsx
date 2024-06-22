@@ -32,13 +32,21 @@ const BasicMetricsCardItem = ({ title, keyMetricValue, likesComparisonDays, grow
       >
         <Box sx={{ marginBottom: '2rem' }}>
           <Typography
-            variant='h6'
+            variant='h1'
             sx={theme => ({
-              fontWeight: '800',
-              color: theme.palette.text.primary,
               paddingLeft: '.5rem',
-              [theme.breakpoints.up('md')]: {
-                fontSize: '1rem'
+              letterSpacing: '.1px',
+              fontSize: {
+                xs: '.95rem',
+                sm: '1rem',
+                md: '1rem',
+                lg: '1rem'
+              },
+              fontWeight: {
+                xs: '800',
+                sm: '800',
+                md: '800',
+                lg: '800'
               }
             })}
           >
