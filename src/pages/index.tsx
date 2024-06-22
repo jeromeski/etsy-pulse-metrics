@@ -1,8 +1,8 @@
 // **Mui Imports
 import { Grid, Box } from '@mui/material'
 import SocMedOverviewContainer from 'src/views/social-media/overview'
-import SocMedAreaChartContainer from 'src/views/social-media/SocMedAreaChartContainer'
-import SocMedMetricsContainer from 'src/views/social-media/SocMedMetricsContainer'
+import SocMedAreaChartContainer from 'src/views/social-media/area-chart'
+import SocMedMetricsContainer from 'src/views/social-media/basic-metrics'
 
 const Home = () => {
   return (
