@@ -7,6 +7,9 @@ import { Grid } from '@mui/material'
 // **Custom Components Imports
 import BasicMetricsCardItem from 'src/views/social-media/basic-metrics/BasicMetricsCardItem'
 
+// **Hooks Imports
+import useDeviceSizesMediaQuery from 'src/hooks/useDeviceSizesMediaQuery'
+
 // **Data Imports
 import { SIMPLE_SOCMED_CARD_METRICS } from 'src/data'
 
@@ -22,6 +25,7 @@ interface SocMedMetricsItem {
 
 const SocMedMetricsContainer = () => {
   const [metricsData, setMetricsData] = useState<SocMedMetricsItem[] | null>(null)
+  const { isMobileXs, isMobileS, isMobileM, isTablet, isLaptopS, isLaptopL, isDesktop } = useDeviceSizesMediaQuery()
   useEffect(() => {
     let isMounted = true
     if (isMounted) {
@@ -40,7 +44,7 @@ const SocMedMetricsContainer = () => {
   return (
     <Grid container>
       {metricsData?.map((item: SocMedMetricsItem) => (
-        <Grid key={item.id} xs={12} sm={4} md={3} lg={2}>
+        <Grid item key={item.id} xs={isMobileXs || isMobileS ? 12 : 6} sm={isMobileM ? 6 : 4} md={3} lg={2}>
           <BasicMetricsCardItem
             title={item.title}
             keyMetricValue={item.keyMetricValue}

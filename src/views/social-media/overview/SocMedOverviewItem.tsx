@@ -17,7 +17,7 @@ const SocMedOverviewItem: React.FC<BasicSocMedOverviewData> = ({ iconURL, title,
   const { isMobileXs, isMobileS, isMobileM, isTablet, isLaptopS, isLaptopL, isDesktop } = useDeviceSizesMediaQuery()
   return (
     <Grid item>
-      <Box sx={{}}>
+      <Box>
         <Box
           sx={{
             display: 'flex',

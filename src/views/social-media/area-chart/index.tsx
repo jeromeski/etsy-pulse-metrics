@@ -186,7 +186,6 @@ const SocMedAreaChartContainer = ({ direction }: Props) => {
           chartData={chartData}
           direction={direction === 'rtl'}
           dataKeyXaxis='date'
-          orientation={direction === 'rtl' ? 'right' : 'left'}
           dataKeyArea='reach'
           stackId='reach'
           type='linear'
