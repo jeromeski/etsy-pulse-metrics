@@ -13,7 +13,8 @@ const BasicMetricsCard = ({ title, keyMetricValue, likesComparisonDays, growth }
   return (
     <Card
       sx={theme => ({
-        maxWidth: '100%'
+        maxWidth: '100%',
+        margin: '0 1rem 1rem 1rem'
       })}
     >
       <Box

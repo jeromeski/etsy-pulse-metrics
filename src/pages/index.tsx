@@ -21,14 +21,14 @@ const Home = () => {
   return (
     <Grid container spacing={5}>
       <Grid item xs={12}>
-        <Box
-        // sx={{ marginBottom: '1rem' }}
-        >
+        <Box sx={{ marginBottom: '1rem' }}>
           <SocMedAreaChartContainer direction='ltr' />
         </Box>
       </Grid>
       <Grid item xs={12}>
-        <SocMedMetricsContainer />
+        <Box>
+          <SocMedMetricsContainer />
+        </Box>
       </Grid>
     </Grid>
     // <Grid container spacing={3}>
