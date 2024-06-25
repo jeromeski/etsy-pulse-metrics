@@ -1,21 +1,44 @@
 import { useMediaQuery } from '@mui/material'
-import { devicesMaxWidth, devicesMinWidth } from 'src/@core/utils/device-sizes'
+import { devicesMinWidth, sizes } from 'src/@core/utils/device-sizes'
+
+/*%%%%%%%%%%%%%%%%%%%%%%
+mobileXs: '0',
+mobileS: '320px',
+mobileM: '375px',
+mobileL: '425px',
+tablet: '768px',
+laptop: '1024px',
+laptopL: '1440px',
+desktop: '2560px'
+
+xs: 0,
+sm: 600,
+md: 900,
+lg: 1200,
+xl: 1536,
+responsiveTable: 765,
+responsiveProdTabs: 415,
+laptop: 1024,
+laptopLg: 1440
+%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
 export default function useDeviceSizesMediaQuery() {
-  const isMobileXs = useMediaQuery(`(${devicesMinWidth.mobileXs}) and (${devicesMaxWidth.mobileS})`)
-  const isMobileS = useMediaQuery(`(${devicesMinWidth.mobileS}) and (${devicesMaxWidth.mobileM})`)
-  const isMobileM = useMediaQuery(`(${devicesMinWidth.mobileM}) and (${devicesMaxWidth.mobileL})`)
-  const isTablet = useMediaQuery(`(${devicesMinWidth.mobileL}) and (${devicesMaxWidth.tablet})`)
-  const isLaptopS = useMediaQuery(`(${devicesMinWidth.tablet}) and (${devicesMaxWidth.laptop})`)
-  const isLaptopL = useMediaQuery(`(${devicesMinWidth.laptop}) and (${devicesMaxWidth.laptopL})`)
-  const isDesktop = useMediaQuery(`(${devicesMinWidth.laptopL}) and (${devicesMaxWidth.desktop})`)
+  const isMobileXs = useMediaQuery(`(${devicesMinWidth.mobileXs}px) and (max-width:${sizes.mobileXsCeil})`)
+  const isMobileS = useMediaQuery(`(${devicesMinWidth.mobileS}) and (max-width:${sizes.mobileSCeil})`)
+  const isMobileM = useMediaQuery(`(${devicesMinWidth.mobileM}) and (max-width:${sizes.mobileMCeil})`)
+  const isMobileL = useMediaQuery(`(${devicesMinWidth.mobileL}) and (max-width:${sizes.mobileLCeil})`)
+  const isTablet = useMediaQuery(`(${devicesMinWidth.tablet}) and (max-width:${sizes.tabletCeil})`)
+  const isLaptop = useMediaQuery(`(${devicesMinWidth.laptop}) and (max-width:${sizes.laptopCeil})`)
+  const isLaptopL = useMediaQuery(`(${devicesMinWidth.laptopL}) and (max-width:${sizes.laptopLCeil})`)
+  const isDesktop = useMediaQuery(`(${devicesMinWidth.desktop}`)
 
   return {
     isMobileXs,
     isMobileS,
     isMobileM,
+    isMobileL,
     isTablet,
-    isLaptopS,
+    isLaptop,
     isLaptopL,
     isDesktop
   }

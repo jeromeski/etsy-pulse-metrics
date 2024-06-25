@@ -1,25 +1,24 @@
 // **Mui Imports
-import { Card, Box, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import { TrendingDown, TrendingUp } from '@mui/icons-material'
 
-interface BasicMetricCardsProps {
-  title: string
-  keyMetricValue: string
-  likesComparisonDays: string
-  growth: string
-}
+// **Type Imports
+import { BasicMetricCardsProps } from 'src/views/social-media/types' 
+
+// **
+import CustomHeaderTitleSm from 'src/@core/components/typography/custom-header-title-sm'
+import CustomMetricLabelLg from 'src/@core/components/typography/custom-metric-label-lg'
+import CustomDescLabel from 'src/@core/components/typography/custom-desc-label'
 
 const BasicMetricsCardItem = ({ title, keyMetricValue, likesComparisonDays, growth }: BasicMetricCardsProps) => {
   return (
-    <Card
-      sx={theme => ({
-        maxWidth: '100%',
-        margin: '1rem',
-        [theme.breakpoints.between('sm', 'md')]: {
-          margin: '1rem .5rem'
-        }
-      })}
-    >
+    <Box sx={(theme) => ({
+        flex: '1 1 200px',
+        margin: '0 10px 0 0',
+        backgroundColor: theme.palette.common.white,
+        borderRadius: '10px',
+        boxShadow: '0px 2px 10px 0px rgba(58, 53, 65, 0.1)',
+      })}>
       <Box
         sx={{
           height: 'auto',
@@ -31,79 +30,35 @@ const BasicMetricsCardItem = ({ title, keyMetricValue, likesComparisonDays, grow
         }}
       >
         <Box sx={{ marginBottom: '2rem' }}>
-          <Typography
-            variant='h1'
-            sx={theme => ({
-              paddingLeft: '.5rem',
-              letterSpacing: '.1px',
-              fontSize: {
-                xs: '.95rem',
-                sm: '1rem',
-                md: '1rem',
-                lg: '1rem'
-              },
-              fontWeight: {
-                xs: '800',
-                sm: '800',
-                md: '800',
-                lg: '800'
-              }
-            })}
-          >
+          <CustomHeaderTitleSm>
             {title}
-          </Typography>
+          </CustomHeaderTitleSm>
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <Typography
-            variant='h4'
-            sx={theme => ({
-              fontWeight: '900',
-              color: theme.palette.common.black,
-              fontSize: '2rem',
-              [theme.breakpoints.between('md', 'xl')]: {
-                fontSize: '2.5rem !important'
-              },
-              letterSpacing: '.5px'
-            })}
-          >
+          <CustomMetricLabelLg>
             {Number(keyMetricValue).toLocaleString()}
-          </Typography>
+          </CustomMetricLabelLg>
         </Box>
         <Box
           sx={{
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            fontWeight: '700',
             marginBottom: '1.5rem'
           }}
         >
-          <Typography
-            variant='body1'
-            sx={theme => ({
-              display: 'inline-block',
-              fontWeight: '800',
-              color: theme.palette.text.primary
-            })}
-          >
+          <CustomDescLabel>
             {growth}%
-          </Typography>
+          </CustomDescLabel>
           {Number(growth) >= 0 ? <TrendingUp color='success' /> : <TrendingDown color='error' />}
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <Typography
-            sx={theme => ({
-              fontWeight: '700',
-              fontSize: '.9rem',
-              color: theme.palette.text.primary
-              // letterSpacing: '.1px'
-            })}
-          >
+          <CustomDescLabel>
             vs previous {likesComparisonDays} days
-          </Typography>
+          </CustomDescLabel>
         </Box>
       </Box>
-    </Card>
+    </Box>
   )
 }
 

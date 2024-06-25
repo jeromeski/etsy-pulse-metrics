@@ -4,60 +4,61 @@ import React from 'react'
 // **Mui Imports
 import { Box, Typography, styled, Divider, Grid } from '@mui/material'
 
+import CustomDescLabel from 'src/@core/components/typography/custom-desc-label'
+import CustomMetricLabelMd from 'src/@core/components/typography/custom-metric-label-md'
+
 // **Type Imports
-import { BasicSocMedOverviewData } from 'src/types/social-media'
 import useDeviceSizesMediaQuery from 'src/hooks/useDeviceSizesMediaQuery'
 
 const StyledImage = styled('img')({
   height: 'auto',
-  width: '50px'
+  width: '45px'
 })
 
+export interface SimpleSocMedCardMetrics {
+  id?: string
+  title: string | undefined
+  keyMetricValue: string | undefined
+  growth?: string
+  likesComparisonDays?: string
+}
+
+export interface BasicSocMedOverviewData extends SimpleSocMedCardMetrics {
+  iconURL: string | undefined
+}
+
 const SocMedOverviewItem: React.FC<BasicSocMedOverviewData> = ({ iconURL, title, keyMetricValue }) => {
-  const { isMobileXs, isMobileS, isMobileM, isTablet, isLaptopS, isLaptopL, isDesktop } = useDeviceSizesMediaQuery()
+  const { isMobileXs, isMobileS, isMobileM, isTablet, isLaptop, isLaptopL, isDesktop } = useDeviceSizesMediaQuery()
   return (
-    <Grid item>
-      <Box>
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            maxWidth: '100%',
-            margin: '.5rem 0',
-            padding: '0 1.5rem',
-            width: '150px'
-          }}
-        >
-          <Box sx={{ marginBottom: '.75rem' }}>
-            <StyledImage src={iconURL} />
-          </Box>
-          <Box>
-            <Typography
-              variant='h4'
-              sx={theme => ({ fontWeight: '900', fontSize: '2rem', color: theme.palette.common.black })}
-            >
-              {Number(keyMetricValue).toLocaleString()}
-            </Typography>
-          </Box>
-          <Box>
-            <Typography
-              variant='body2'
-              sx={theme => ({
-                fontSize: '.75rem',
-                fontWeight: '900',
-                color: theme.palette.grey['A400'],
-                letterSpacing: '1px'
-              })}
-            >
-              {title}
-            </Typography>
-          </Box>
+    <>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          margin: '1rem 1rem',
+          flex: {
+            xs: '0 1 150px',
+            lg: '0 1 120px'
+          },
+          padding: '0 10px 0 10px',
+        }}
+      >
+        <Box sx={{ marginBottom: '7px' }}>
+          <StyledImage src={iconURL} />
         </Box>
-        {isMobileXs || isMobileS || isMobileM ? <Divider /> : <></>}
+        <Box>
+          <CustomMetricLabelMd>
+            {Number(keyMetricValue).toLocaleString()}
+          </CustomMetricLabelMd>
+        </Box>
+        <Box>
+          <CustomDescLabel>{title}</CustomDescLabel>
+        </Box>
       </Box>
-    </Grid>
+      {isMobileXs || isMobileS || isMobileM ? <Divider /> : <></>}
+  </>
   )
 }
 
