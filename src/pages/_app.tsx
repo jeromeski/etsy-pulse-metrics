@@ -1,6 +1,51 @@
-import "@/styles/globals.css";
-import type { AppProps } from "next/app";
+// **React Imports
+import { ReactElement, ReactNode } from "react";
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+// **Next Imports
+import type { AppProps } from "next/app";
+import { NextPage } from "next";
+
+// **Mui Imports
+
+// **Custom Imports
+
+// **Vendor Imports
+import type { EmotionCache } from "@emotion/cache";
+import { CacheProvider } from "@emotion/react";
+
+// **Utils Imports
+import { createEmotionCache } from 'src/@core/utils/create-emotion-cache'
+import BlankLayout from 'src/templates/blank-layout'
+
+// **Global Styles Imports
+import 'src/styles/reset.css'
+import ThemeComponent from 'src/@core/theme/ThemeComponent'
+import themeConfig from 'src/configs/themeConfig'
+
+import { Settings } from 'src/@core/theme/ThemeComponent'
+
+const clientSideEmotionCache = createEmotionCache()
+
+type ExtendedAppProps = AppProps & {
+  Component: NextPage & {
+    getLayout?: (page: ReactElement) => ReactNode
+  }
+  emotionCache: EmotionCache
+}
+
+const themeConfigMode = themeConfig.mode
+
+const themeSettings: Settings = {
+  themeColor: 'primary',
+  themeConfig: themeConfig,
+  mode: themeConfigMode
+}
+
+export default function App({ Component, emotionCache = clientSideEmotionCache, pageProps }: ExtendedAppProps) {
+  const getLayout = Component.getLayout ?? ((page: any) => <BlankLayout>{page}</BlankLayout>)
+  return (
+    <CacheProvider value={emotionCache}>
+      <ThemeComponent settings={themeSettings}>{getLayout(<Component {...pageProps} />)}</ThemeComponent>
+    </CacheProvider>
+  )
 }
