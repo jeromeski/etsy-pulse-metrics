@@ -25,7 +25,7 @@ interface SocMedMetricsItem {
 
 const SocMedMetricsContainer = () => {
   const [metricsData, setMetricsData] = useState<SocMedMetricsItem[] | null>(null)
-  const { isMobileXs, isMobileS, isMobileM, isTablet, isLaptopS, isLaptopL, isDesktop } = useDeviceSizesMediaQuery()
+  const { isMobileXs, isMobileS, isMobileM } = useDeviceSizesMediaQuery()
   useEffect(() => {
     let isMounted = true
     if (isMounted) {

@@ -2,12 +2,12 @@
 import { Theme } from '@mui/material/styles'
 
 // ** Type Imports
-import { Settings } from 'src/@core/context/settingsContext'
+// import { Settings } from 'src/@core/context/settingsContext'
 
 // ** Util Import
 import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
 
-const GlobalStyles = (theme: Theme, settings: Settings) => {
+const GlobalStyles = (theme: Theme, settings: any) => {
   // ** Vars
   const { skin } = settings
 

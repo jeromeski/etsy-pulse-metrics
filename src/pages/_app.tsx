@@ -18,7 +18,7 @@ import { createEmotionCache } from 'src/@core/utils/create-emotion-cache'
 import BlankLayout from 'src/templates/blank-layout'
 
 // **Global Styles Imports
-import "@/styles/reset.css";
+import 'src/styles/reset.css'
 import ThemeComponent from 'src/@core/theme/ThemeComponent'
 import themeConfig from 'src/configs/themeConfig'
 

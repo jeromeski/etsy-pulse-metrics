@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { Settings } from 'src/@core/context/settingsContext'
+// import { Settings } from 'src/@core/context/settingsContext'
 
 export type Layout = 'vertical' | 'horizontal' | 'blank' | 'blankWithAppBar'
 
@@ -51,13 +51,13 @@ export type HorizontalNavItemsType = (NavLink | NavGroup)[]
 
 export type LayoutProps = {
   hidden: boolean
-  settings: Settings
+  settings: any
   children: ReactNode
   menuLockedIcon?: ReactNode
   menuUnlockedIcon?: ReactNode
   verticalNavItems?: VerticalNavItemsType
   scrollToTop?: (props?: any) => ReactNode
-  saveSettings: (values: Settings) => void
+  saveSettings: (values: any) => void
   footerContent?: (props?: any) => ReactNode
   horizontalNavItems?: HorizontalNavItemsType
   verticalAppBarContent?: (props?: any) => ReactNode

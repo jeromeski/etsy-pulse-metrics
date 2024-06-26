@@ -41,7 +41,7 @@ const ControlledAreaChart: React.FC<ControlledAreaChartProps> = ({
   reversed,
   ...props
 }) => {
-  const { isMobileXs, isMobileS, isMobileM, isTablet, isLaptopS } = useDeviceSizesMediaQuery()
+  const { isMobileXs, isMobileS, isMobileM, isTablet, isLaptop } = useDeviceSizesMediaQuery()
   return (
     <Box sx={{ height: '250px', width: '100%' }}>
       <ResponsiveContainer height='100%' width='100%'>
@@ -50,7 +50,7 @@ const ControlledAreaChart: React.FC<ControlledAreaChartProps> = ({
           <XAxis
             dataKey='date'
             reversed={reversed}
-            tickCount={isLaptopS ? 9 : isTablet ? 7 : 3}
+            tickCount={isLaptop ? 9 : isTablet ? 7 : 3}
             tick={props => {
               return <ControlledChartAxisTick x={props.x} y={props.y} payload={props.payload} rotation={-45} />
             }}

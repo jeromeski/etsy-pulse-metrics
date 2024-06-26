@@ -16,9 +16,6 @@ import { SIMPLE_SOCMED_FB_DATA_90 } from 'src/data'
 import ControlledChartSelect from 'src/@core/components/controlled-chart-select'
 import ControlledAreaChart from 'src/@core/components/controlled-area-chart'
 
-// ** Hook Imports
-import useDeviceSizesMediaQuery from 'src/hooks/useDeviceSizesMediaQuery'
-
 // ** Types
 interface RenderOptionProp {
   id?: string
@@ -68,7 +65,6 @@ const SocMedAreaChartContainer = ({ direction }: Props) => {
   const [chartData, setChartData] = useState<any[]>([])
   const [selectedValue, setSelectedValue] = useState<string>(initDayRange)
   // ** Hooks
-  const { isMobileXs, isMobileS, isMobileM, isTablet, isLaptopS, isLaptopL, isDesktop } = useDeviceSizesMediaQuery()
 
   const getOptionTitle = (numOfDays: OptionProp[], selectedValue: string): string | undefined => {
     const foundOption = numOfDays.find(day => day.value === selectedValue)

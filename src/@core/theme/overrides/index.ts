@@ -2,7 +2,7 @@
 import { Theme } from '@mui/material/styles'
 
 // ** Type Import
-import { Settings } from 'src/@core/context/settingsContext'
+// import { Settings } from 'src/@core/context/settingsContext'
 
 // ** Overrides Imports
 import MuiCard from './card'
@@ -35,7 +35,7 @@ import MuiAutocomplete from './autocomplete'
 import MuiToggleButton from './toggleButton'
 import MuiDateTimePicker from './dateTimePicker'
 
-const Overrides = (theme: Theme, settings: Settings) => {
+const Overrides = (theme: Theme, settings: any) => {
   const { skin } = settings
 
   const button = MuiButton(theme)

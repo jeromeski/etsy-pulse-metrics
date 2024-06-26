@@ -15,7 +15,7 @@ import Document, {
 import createEmotionServer from "@emotion/server/create-instance";
 
 // **Utils Imports
-import { createEmotionCache } from "@/utils/createEmotionCache";
+import { createEmotionCache } from 'src/utils/createEmotionCache'
 
 // DEFINE custom MyDocumentProps extending DocumentInitialProps and adding styles property
 type MyDocumentProps = DocumentInitialProps & {

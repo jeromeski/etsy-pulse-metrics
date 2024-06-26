@@ -1,4 +1,4 @@
-import withUseMediaQuery from 'src/@core/components/with-use-media-query'
+import useDeviceSizesMediaQuery from 'src/hooks/useDeviceSizesMediaQuery'
 
 interface ControlledChartAxisTickType {
   x?: number
@@ -7,35 +7,24 @@ interface ControlledChartAxisTickType {
     value: string
   }
   rotation?: number
-  isXtraSmallScreen?: boolean
-  isSmallScreen?: boolean
-  isMediumScreen?: boolean
-  isTabletScreen?: boolean
-  isSmallLaptopScreen?: boolean
-  isLaptopScreen?: boolean
-  isDesktopScreen?: boolean
 }
 
 const ControlledChartAxisTick = ({
   x = 0,
   y = 0,
   payload = { value: '' },
-  isXtraSmallScreen,
-  rotation = 0,
-  isSmallScreen,
-  isMediumScreen,
-  isTabletScreen,
-  isSmallLaptopScreen,
-  isLaptopScreen,
-  isDesktopScreen
+  rotation = 0
 }: ControlledChartAxisTickType) => {
+  const { isMobileXs, isMobileS, isMobileM, isMobileL, isTablet, isLaptop, isLaptopL, isDesktop } =
+    useDeviceSizesMediaQuery()
+
   // Determine the rotation angle (e.g., 270 degrees for vertical labels)
   const cx = x
   const cy = y
 
   return (
     <text
-      style={{ fontSize: isXtraSmallScreen ? '.8rem' : isSmallScreen ? '.8rem' : '1rem' }}
+      style={{ fontSize: isMobileXs ? '.8rem' : isMobileS ? '.8rem' : '1rem' }}
       x={cx}
       y={cy}
       transform={`rotate(${rotation} ${cx} ${cy} )`}
@@ -46,4 +35,4 @@ const ControlledChartAxisTick = ({
   )
 }
 
-export default withUseMediaQuery(ControlledChartAxisTick)
+export default ControlledChartAxisTick
