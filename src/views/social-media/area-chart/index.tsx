@@ -68,7 +68,6 @@ const SocMedAreaChartContainer = ({ direction }: Props) => {
   const [chartData, setChartData] = useState<any[]>([])
   const [selectedValue, setSelectedValue] = useState<string>(initDayRange)
   // ** Hooks
-  const { isMobileXs, isMobileS, isMobileM, isTablet, isLaptopS, isLaptopL, isDesktop } = useDeviceSizesMediaQuery()
 
   const getOptionTitle = (numOfDays: OptionProp[], selectedValue: string): string | undefined => {
     const foundOption = numOfDays.find(day => day.value === selectedValue)
@@ -191,7 +190,7 @@ const SocMedAreaChartContainer = ({ direction }: Props) => {
           type='linear'
           tickCount={4}
           stroke='#003bb3'
-          strokeWidth='3'
+          strokeWidth='2'
           fill='rgb(0,51,187)'
         />
       </CardContent>
