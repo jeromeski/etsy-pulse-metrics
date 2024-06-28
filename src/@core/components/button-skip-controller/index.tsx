@@ -34,20 +34,20 @@ const ButtonSkipController = ({ data, increaseCountHandler, decreaseCountHandler
   
   return (
     <Box sx={{ marginLeft: {xs: 'auto', sm: '0'}}}>
-      <StyledButtonGroup size='small' variant='contained'>
+      <StyledButtonGroup size='small' >
         {data && (
-          <StyledButton disabled size='small' variant='contained'>
+          <StyledButton disabled>
             <Typography variant='body2' sx={{ fontWeight: 500 }}>
               {data}
             </Typography>
           </StyledButton>
         )}
-        <IconButton size='small' onClick={decreaseCountHandler}>
+        <Button onClick={decreaseCountHandler}>
           <ChevronLeft />
-        </IconButton>
-        <IconButton size='small' onClick={increaseCountHandler}>
+        </Button>
+        <Button onClick={increaseCountHandler}>
           <ChevronRight />
-        </IconButton>
+        </Button>
       </StyledButtonGroup>
     </Box>
   )

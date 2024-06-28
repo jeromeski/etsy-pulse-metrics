@@ -5,15 +5,14 @@ import { Typography } from '@mui/material'
 const CustomHeaderTitleSm = ({ children }: { children: React.ReactNode }) => {
   return (
     <Typography
-      variant='h1'
+      variant='h2'
       sx={{
-        paddingLeft: '.5rem',
         letterSpacing: '.1px',
         fontSize: {
-          xs: '.95rem'
+          xs: '16px'
         },
         fontWeight: {
-          xs: '800'
+          xs: '700'
         }
       }}
     >

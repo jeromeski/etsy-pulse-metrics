@@ -4,6 +4,8 @@ import RechartsBarChart from 'src/views/recharts/RechartsBarChart'
 import useDeviceSizesMediaQuery from 'src/hooks/useDeviceSizesMediaQuery'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, TooltipProps } from 'recharts'
 import CustomToolTip from 'src/@core/components/tool-tip-chart'
+import CustomHeaderTitleLg from 'src/@core/components/typography/custom-header-title-lg'
+import ButtonSkipController from 'src/@core/components/button-skip-controller'
 
 interface Props {
   direction: 'ltr' | 'rtl'
@@ -94,12 +96,7 @@ interface MobileScreenHeaderProps {
   height: string
 }
 
-const SocMedMobileScreenHeader = ({
-  background,
-  width = '100%',
-  height = '100%',
-  children
-}: MobileScreenHeaderProps) => {
+const SocMedMobileHeader = ({ background, width = '100%', height = '100%', children }: MobileScreenHeaderProps) => {
   return (
     <Box
       sx={{
@@ -126,46 +123,47 @@ const SocMedMobileScreenHeader = ({
 const FacebookDetailedAnalytics: React.FC<Props> = ({ direction }) => {
   const { isMobileXs, isMobileS, isMobileM, isMobileL, isTablet, isLaptop, isLaptopL, isDesktop } =
     useDeviceSizesMediaQuery()
+  const isSmallScreen = isMobileXs || isMobileS || isMobileM || isMobileL
+  
+  const handleIncreaseCount = () => {}
+  const handleDecreaseCount = () => {}
   return (
-    <Grid container>
-      <Grid item xs='auto' spacing={2}>
+    <Grid container spacing={2}>
+      <Grid item xs={2}>
         <Box sx={{ display: 'flex', flexDirection: { xs: 'column', lg: 'row' } }}>
-          {isMobileXs ||
-            isMobileS ||
-            isMobileM ||
-            (isMobileL && (
-              <>
-                <SocMedMobileScreenHeader
-                  background='linear-gradient(90deg, rgba(33,51,87,1) 0%, rgba(66,103,178,1) 50%, rgba(33,51,87,1) 100%)'
-                  width='100%'
-                  height='100%'
+          {isSmallScreen && (
+            <>
+              <SocMedMobileHeader
+                background='linear-gradient(90deg, rgba(33,51,87,1) 0%, rgba(66,103,178,1) 50%, rgba(33,51,87,1) 100%)'
+                width='100%'
+                height='100%'
+              >
+                <CustomSvgIcon id='icon-facebook-square' color='#4267B2' />
+              </SocMedMobileHeader>
+              <Box sx={{ display: 'flex', justifyContent: 'center', padding: '10px 15px' }}>
+                <Typography
+                  variant='h1'
+                  sx={{
+                    fontSize: {
+                      xs: '20px',
+                      lg: '20px'
+                    },
+                    fontWeight: '700',
+                    letterSpacing: '0px',
+                    color: 'dark grey'
+                  }}
                 >
-                  <CustomSvgIcon id='icon-facebook-square' color='#4267B2' />
-                </SocMedMobileScreenHeader>
-                <Box sx={{ display: 'flex', justifyContent: 'center', padding: '10px 15px' }}>
-                  <Typography
-                    variant='h1'
-                    sx={{
-                      fontSize: {
-                        xs: '20px',
-                        lg: '20px'
-                      },
-                      fontWeight: '700',
-                      letterSpacing: '0px',
-                      color: 'dark grey'
-                    }}
-                  >
-                    Channel Statistics
-                  </Typography>
-                </Box>
-              </>
-            ))}
-          <Box sx={{ backgroundColor: '#4267B2', maxWidth: '100%' }}>
+                  Channel Statistics
+                </Typography>
+              </Box>
+            </>
+          )}
+          <Box sx={{ backgroundColor: '#4267B2', maxWidth: '100%', borderRadius: '5px' }}>
             <CustomSvgIcon id='icon-facebook-square' color='#4267B2' />
           </Box>
         </Box>
       </Grid>
-      <Grid item zeroMinWidth sx={{ flexGrow: 1 }}>
+      <Grid item xs={5} sx={{ flexGrow: 1 }}>
         <Card
           sx={{
             height: {
@@ -177,27 +175,30 @@ const FacebookDetailedAnalytics: React.FC<Props> = ({ direction }) => {
           }}
         >
           <CardHeader
-            title='Monthly Engagement Metrics'
-            titleTypographyProps={{ variant: 'h6' }}
+            title={<CustomHeaderTitleLg>Monthly Engagements</CustomHeaderTitleLg>}
+            // titleTypographyProps={{ variant: 'h6' }}
             sx={{
               flexDirection: ['column', 'row'],
               alignItems: ['flex-start', 'center'],
               '& .MuiCardHeader-action': { marginBottom: 0 },
               '& .MuiCardHeader-content': { marginBottom: [2, 0] }
             }}
+            action={<ButtonSkipController data='24' increaseCountHandler={handleIncreaseCount} decreaseCountHandler={handleDecreaseCount} />}
           />
-          <CardContent sx={{}}>
-            <ResponsiveContainer height='100%' width='100%'>
-              <BarChart data={data} barSize={15} style={{ direction }} margin={{ left: -20 }}>
-                <CartesianGrid strokeDasharray='3 3' />
-                <XAxis dataKey='name' reversed={direction === 'rtl'} />
-                <YAxis orientation={direction === 'rtl' ? 'right' : 'left'} />
-                <Tooltip content={<CustomToolTip />} />
-                <Bar dataKey='Apple' fill='#3b5998' />
-                <Bar dataKey='Samsung' fill='#4267B2' />
-                <Bar dataKey='Oneplus' fill='#8b9dc3' />
-              </BarChart>
-            </ResponsiveContainer>
+          <CardContent>
+            <Box sx={{ height: '250px' }}>
+              <ResponsiveContainer height='100%' width='100%'>
+                <BarChart data={data} barSize={15} style={{ direction }} margin={{ left: -20 }}>
+                  <CartesianGrid strokeDasharray='3 3' />
+                  <XAxis dataKey='name' reversed={direction === 'rtl'} />
+                  <YAxis orientation={direction === 'rtl' ? 'right' : 'left'} />
+                  <Tooltip content={<CustomToolTip />} />
+                  <Bar dataKey='Apple' fill='#3b5998' />
+                  <Bar dataKey='Samsung' fill='#4267B2' />
+                  <Bar dataKey='Oneplus' fill='#8b9dc3' />
+                </BarChart>
+              </ResponsiveContainer>
+            </Box>
           </CardContent>
         </Card>
       </Grid>

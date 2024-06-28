@@ -1,5 +1,4 @@
 import { SvgIcon } from '@mui/material'
-import Shadows from 'src/@core/theme/shadows'
 
 interface CustomSvgIconProps {
   id: string

@@ -11,6 +11,8 @@ laptop: '1024px',
 laptopL: '1440px',
 desktop: '2560px'
 
+
+
 xs: 0,
 sm: 600,
 md: 900,
@@ -31,7 +33,7 @@ export default function useDeviceSizesMediaQuery() {
   const isLaptop = useMediaQuery(`(${devicesMinWidth.laptop}) and (max-width:${sizes.laptopCeil})`)
   const isLaptopL = useMediaQuery(`(${devicesMinWidth.laptopL}) and (max-width:${sizes.laptopLCeil})`)
   const isDesktop = useMediaQuery(`(${devicesMinWidth.desktop}`)
-
+  const isSmallScreen = isMobileXs || isMobileS || isMobileM || isMobileL
   return {
     isMobileXs,
     isMobileS,
@@ -40,6 +42,7 @@ export default function useDeviceSizesMediaQuery() {
     isTablet,
     isLaptop,
     isLaptopL,
-    isDesktop
+    isDesktop,
+    isSmallScreen
   }
 }

@@ -6,7 +6,7 @@ import { Typography } from '@mui/material'
 const CustomHeaderTitleLg = ({ children }: { children: React.ReactNode }) => {
   return (
     <Typography
-      variant='h1'
+      variant='h2'
       sx={{
         letterSpacing: '0px',
         marginBottom: {
