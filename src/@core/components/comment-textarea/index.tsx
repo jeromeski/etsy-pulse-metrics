@@ -36,7 +36,7 @@ const CommentTextarea: React.FC<CommentTextareaProps> = ({ callback, value }) =>
     }
   }, [callback])
 
-  return <CommentTextAreaWrapper ref={textRef} value={value} />
+  return <CommentTextAreaWrapper ref={textRef} value={value} minRows={10} />
 }
 
 export default CommentTextarea

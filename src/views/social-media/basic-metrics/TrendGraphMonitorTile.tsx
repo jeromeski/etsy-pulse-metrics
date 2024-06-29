@@ -1,8 +1,8 @@
 // ** React Imports
-import React, { useState } from 'react'
+import React, { useState, useEffect, FormEvent } from 'react'
 
 //  **Mui Imports
-import { Card, CardHeader, CardContent, Box, Typography, MenuItem } from '@mui/material'
+import { Card, CardHeader, CardContent, Box, Typography, MenuItem, Chip } from '@mui/material'
 import LoadingButton from '@mui/lab/LoadingButton'
 
 // **Recharts Imports
@@ -19,6 +19,7 @@ import CustomDescLabel from 'src/@core/components/typography/custom-desc-label'
 //**Icon Imports
 import MoreVertSharpIcon from '@mui/icons-material/MoreVertSharp'
 import AddCommentSharpIcon from '@mui/icons-material/AddCommentSharp'
+import PsychologyAltIcon from '@mui/icons-material/PsychologyAlt'
 
 // **Util Imports
 import useDeviceSizesMediaQuery from 'src/hooks/useDeviceSizesMediaQuery'
@@ -108,7 +109,7 @@ const data = [
   }
 ]
 
-const MetricTrendGraphMonitorTile = ({
+const TrendGraphMonitorTile = ({
   title = 'Likes',
   icon,
   graph,
@@ -119,14 +120,13 @@ const MetricTrendGraphMonitorTile = ({
   comparisonDays = 30
 }: {
   title?: string
-  titleSize: 'large' | 'medium' | 'small'
-  icon: React.ReactNode
+  titleSize?: 'large' | 'medium' | 'small'
+  icon?: React.ReactNode
   graph?: React.ReactNode
-  children: React.ReactNode
   actionComponent?: React.ReactNode
-  total: number | string
-  growth: string | number
-  comparisonDays: string | number
+  total?: number | string
+  growth?: string | number
+  comparisonDays?: string | number
 }) => {
   //** Hooks
   const { isSmallScreen } = useDeviceSizesMediaQuery()
@@ -134,18 +134,32 @@ const MetricTrendGraphMonitorTile = ({
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [isSuccess, setIsSuccess] = useState<boolean>(false)
 
-  const handleSubmit = async () => {
-    await fakeFetch(setIsLoading)
-    toast('success')
-    console.log(textareaValue)
-  }
-
   // Placeholders
   const dataKey = 'Clicks'
   const stroke = '#34518d'
   const stackId = 'Clicks'
   const strokeWidth = '2'
   const fill = 'rgb(115, 103, 240)'
+
+  const handleSubmit =
+    (callback: () => void) =>
+    async (event: FormEvent<HTMLFormElement>): Promise<void> => {
+      event.preventDefault()
+      setIsSuccess(false)
+      await fakeFetch(setIsLoading)
+      if (!isLoading) {
+        setTextareaValue('')
+        if (callback) callback()
+        setIsSuccess(true)
+      }
+    }
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success('Comment Saved.')
+    }
+  }, [isSuccess])
+
   return (
     <Card sx={{ padding: '15px 15px 0 15px', height: '100%', width: '100%' }}>
       {title && (
@@ -155,6 +169,8 @@ const MetricTrendGraphMonitorTile = ({
             <Box sx={{ display: 'flex' }}>
               <ControlledIconMenuButton
                 icon={<AddCommentSharpIcon sx={theme => ({ color: theme.palette.grey['A200'] })} />}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
                 renderMenuItems={closeMenu => (
                   <MenuItem
                     sx={{
@@ -167,38 +183,44 @@ const MetricTrendGraphMonitorTile = ({
                       }
                     }}
                   >
-                    <Box sx={{ display: 'column', width: '350px', height: 'auto', overflowY: 'hidden' }}>
-                      <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
-                        <Typography variant='h5' sx={{ fontWeight: '700' }}>
-                          Comments
-                        </Typography>
+                    <form onSubmit={handleSubmit(closeMenu)}>
+                      <Box sx={{ display: 'column', width: '350px', height: 'auto', overflowY: 'hidden' }}>
+                        <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
+                          <Typography variant='h5' sx={{ fontWeight: '700' }}>
+                            Comments
+                          </Typography>
 
-                        <LoadingButton
-                          variant='contained'
-                          sx={{ textTransform: 'none' }}
-                          onClick={handleSubmit}
-                          loading={isLoading}
-                          disabled={isLoading}
+                          <LoadingButton
+                            variant='contained'
+                            sx={{ textTransform: 'none' }}
+                            type='submit'
+                            loading={isLoading}
+                            disabled={isLoading || !textareaValue}
+                          >
+                            Add a Comment
+                          </LoadingButton>
+                        </Box>
+                        <Box
+                          sx={{
+                            border: '1px solid rgb(118, 118, 118)',
+                            // borderBottomColor: 'transparent',
+                            padding: '15px',
+                            marginBottom: '-2px'
+                          }}
                         >
-                          Add a Comment
-                        </LoadingButton>
+                          <Typography
+                            variant='h6'
+                            sx={{ fontSize: '16px !important', display: 'flex', alignItems: 'center' }}
+                          >
+                            <PsychologyAltIcon fontSize='small' color='primary' sx={{ marginRight: '5px' }} />{' '}
+                            {!textareaValue ? 'There are no comments.' : 'Make comments meaningful'}
+                          </Typography>
+                        </Box>
+                        <Box>
+                          <CommentTextarea callback={setTextareaValue} value={textareaValue} />
+                        </Box>
                       </Box>
-                      <Box
-                        sx={{
-                          border: '1px solid rgb(118, 118, 118)',
-                          // borderBottomColor: 'transparent',
-                          padding: '15px',
-                          marginBottom: '-2px'
-                        }}
-                      >
-                        <Typography variant='h6' sx={{ fontSize: '16px !important' }}>
-                          There are no comments.
-                        </Typography>
-                      </Box>
-                      <Box>
-                        <CommentTextarea callback={setTextareaValue} value={textareaValue} />
-                      </Box>
-                    </Box>
+                    </form>
                   </MenuItem>
                 )}
               />
@@ -265,10 +287,4 @@ const MetricTrendGraphMonitorTile = ({
   )
 }
 
-export default MetricTrendGraphMonitorTile
-
-/*
-const BasicMetricTrendMonitorTile = () => {}
-
-const BasicMetricGraphMonitorTile = () => {}
-*/
+export default TrendGraphMonitorTile
