@@ -1,0 +1,70 @@
+{
+  "data": [
+    {
+      "name": "post_reactions_like_total",
+      "period": "lifetime",
+      "values": [
+        {
+          "value": 123
+        }
+      ],
+      "title": "Lifetime Total Likes",
+      "description": "The total number of 'like' reactions on your post."
+    },
+    {
+      "name": "post_reactions_love_total",
+      "period": "lifetime",
+      "values": [
+        {
+          "value": 45
+        }
+      ],
+      "title": "Lifetime Total Loves",
+      "description": "The total number of 'love' reactions on your post."
+    },
+    {
+      "name": "post_reactions_wow_total",
+      "period": "lifetime",
+      "values": [
+        {
+          "value": 10
+        }
+      ],
+      "title": "Lifetime Total Wows",
+      "description": "The total number of 'wow' reactions on your post."
+    },
+    {
+      "name": "post_reactions_haha_total",
+      "period": "lifetime",
+      "values": [
+        {
+          "value": 7
+        }
+      ],
+      "title": "Lifetime Total Hahas",
+      "description": "The total number of 'haha' reactions on your post."
+    },
+    {
+      "name": "post_reactions_sorry_total",
+      "period": "lifetime",
+      "values": [
+        {
+          "value": 3
+        }
+      ],
+      "title": "Lifetime Total Sorries",
+      "description": "The total number of 'sorry' reactions on your post."
+    },
+    {
+      "name": "post_reactions_anger_total",
+      "period": "lifetime",
+      "values": [
+        {
+          "value": 1
+        }
+      ],
+      "title": "Lifetime Total Angers",
+      "description": "The total number of 'anger' reactions on your post."
+    }
+  ]
+}

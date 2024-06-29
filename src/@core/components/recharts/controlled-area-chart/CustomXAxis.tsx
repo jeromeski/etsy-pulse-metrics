@@ -1,7 +1,7 @@
 // **Vendor Imports
 import { XAxis as RechartsXAxis, XAxisProps } from 'recharts'
 // ** Custom Component Imports
-import ControlledChartAxisTick from 'src/@core/components/controlled-chart-axis-tick'
+import ControlledChartAxisTick from 'src/@core/components/recharts/controlled-chart-axis-tick'
 
 interface CustomXAxisProps extends XAxisProps {
   dataKey?: string

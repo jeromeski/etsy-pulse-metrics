@@ -13,7 +13,7 @@ import { SIMPLE_SOCMED_FB_DATA90 } from 'src/views/social-media/data'
 
 // ** Custom Component Imports
 import ControlledChartSelect from 'src/@core/components/controlled-chart-select'
-import ControlledAreaChart from 'src/@core/components/controlled-area-chart'
+import ControlledAreaChart from 'src/@core/components/recharts/controlled-area-chart'
 import CardAreaChartHeader from 'src/views/social-media/daily-reach-chart/CardAreaChartHeader'
 import CardAreaChartLegend from 'src/views/social-media/daily-reach-chart/CardAreaChartLegend'
 import StackedAreaChart from 'src/views/social-media/overview-chart/StackedAreaChart'

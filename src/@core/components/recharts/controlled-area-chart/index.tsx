@@ -5,7 +5,7 @@ import { Box } from '@mui/material'
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 
 // ** Custom Component Imports
-import ControlledChartAxisTick from 'src/@core/components/controlled-chart-axis-tick'
+import ControlledChartAxisTick from 'src/@core/components/recharts/controlled-chart-axis-tick'
 import ToolTipChart from 'src/@core/components/tool-tip-chart'
 
 // ** Hooks

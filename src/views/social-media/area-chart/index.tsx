@@ -14,7 +14,7 @@ import { SIMPLE_SOCMED_FB_DATA_90 } from 'src/data'
 
 // ** Custom Component Imports
 import ControlledChartSelect from 'src/@core/components/controlled-chart-select'
-import ControlledAreaChart from 'src/@core/components/controlled-area-chart'
+import ControlledAreaChart from 'src/@core/components/recharts/controlled-area-chart'
 
 // ** Hook Imports
 import useDeviceSizesMediaQuery from 'src/hooks/useDeviceSizesMediaQuery'
