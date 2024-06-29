@@ -9,6 +9,7 @@ import MetricTrendGraphMonitorTile from 'src/views/social-media/basic-metrics/Tr
 import fakeFetch from 'src/@core/utils/fakeFetch'
 import toast from 'react-hot-toast'
 import { useState } from 'react'
+import FbSpecificAnalyticsView from './../views/dashboards/social-media/FbSpecificAnalyticsView'
 
 const Home = () => {
   const { isSmallScreen } = useDeviceSizesMediaQuery()
@@ -22,12 +23,7 @@ const Home = () => {
         <Grid container>
           {/* <Grid item xs={2}></Grid> */}
           <Grid item xs={12}>
-            <MetricTrendGraphMonitorTile
-            // isLoading={isLoading}
-            // handleSubmit={handleSubmit}
-            // textareaValue={textareaValue}
-            // setTextareaValue={setTextareaValue}
-            />
+            <FbSpecificAnalyticsView />
           </Grid>
         </Grid>
       </Grid>
