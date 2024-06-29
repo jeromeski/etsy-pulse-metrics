@@ -1,14 +1,31 @@
-import React from 'react'
-import { Card, CardHeader, CardContent, Box, IconButton } from '@mui/material'
+// ** React Imports
+import React, { useState } from 'react'
+
+//  **Mui Imports
+import { Card, CardHeader, CardContent, Box, Typography, MenuItem } from '@mui/material'
+import LoadingButton from '@mui/lab/LoadingButton'
+
+// **Recharts Imports
 import { Area, AreaChart, ResponsiveContainer, XAxis, YAxis } from 'recharts'
+
+// **Custom Components
 import MetricTotalHeading from 'src/@core/components/typography/metric-total-heading'
 import TitleCardHeader from 'src/@core/components/typography/title-card-header'
 import TrendPercentageIndicator from 'src/@core/components/typography/trend-percentage-indicator'
+import ControlledIconMenuButton from 'src/@core/components/controlled-icon-menu-button'
+import CommentTextarea from 'src/@core/components/comment-textarea'
+import CustomDescLabel from 'src/@core/components/typography/custom-desc-label'
+
 //**Icon Imports
 import MoreVertSharpIcon from '@mui/icons-material/MoreVertSharp'
 import AddCommentSharpIcon from '@mui/icons-material/AddCommentSharp'
+
+// **Util Imports
 import useDeviceSizesMediaQuery from 'src/hooks/useDeviceSizesMediaQuery'
-import CustomDescLabel from 'src/@core/components/typography/custom-desc-label'
+import fakeFetch from 'src/@core/utils/fakeFetch'
+
+// **Vendor Imports
+import toast from 'react-hot-toast'
 
 const data = [
   {
@@ -91,20 +108,6 @@ const data = [
   }
 ]
 
-interface TinyResponsiveContainerProps {
-  children: React.ReactNode
-  viewBoxWidth: number
-  viewBoxHeight: number
-}
-
-const TinyResponsiveContainer: React.FC<TinyResponsiveContainerProps> = ({ children, viewBoxWidth, viewBoxHeight }) => {
-  return (
-    <ResponsiveContainer width='100%' height={40}>
-      <>{children}</>
-    </ResponsiveContainer>
-  )
-}
-
 const MetricTrendGraphMonitorTile = ({
   title = 'Likes',
   icon,
@@ -125,7 +128,19 @@ const MetricTrendGraphMonitorTile = ({
   growth: string | number
   comparisonDays: string | number
 }) => {
+  //** Hooks
   const { isSmallScreen } = useDeviceSizesMediaQuery()
+  const [textareaValue, setTextareaValue] = useState<string>('')
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isSuccess, setIsSuccess] = useState<boolean>(false)
+
+  const handleSubmit = async () => {
+    await fakeFetch(setIsLoading)
+    toast('success')
+    console.log(textareaValue)
+  }
+
+  // Placeholders
   const dataKey = 'Clicks'
   const stroke = '#34518d'
   const stackId = 'Clicks'
@@ -137,14 +152,80 @@ const MetricTrendGraphMonitorTile = ({
         <CardHeader
           title={<TitleCardHeader size={titleSize}>{title}</TitleCardHeader>}
           action={
-            <>
-              <IconButton size='small' sx={{ paddingTop: 0, paddingBottom: 0 }}>
-                <AddCommentSharpIcon sx={theme => ({ color: theme.palette.grey['A200'] })} />
-              </IconButton>
-              <IconButton size='small' sx={{ paddingTop: 0, paddingRight: 0, paddingBottom: 0 }}>
-                <MoreVertSharpIcon sx={theme => ({ color: theme.palette.grey['A200'] })} />
-              </IconButton>
-            </>
+            <Box sx={{ display: 'flex' }}>
+              <ControlledIconMenuButton
+                icon={<AddCommentSharpIcon sx={theme => ({ color: theme.palette.grey['A200'] })} />}
+                renderMenuItems={closeMenu => (
+                  <MenuItem
+                    sx={{
+                      backgroundColor: 'transparent !important',
+                      '&:hover': {
+                        backgroundColor: 'transparent'
+                      },
+                      '&:focus': {
+                        backgroundColor: 'transparent'
+                      }
+                    }}
+                  >
+                    <Box sx={{ display: 'column', width: '350px', height: 'auto', overflowY: 'hidden' }}>
+                      <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
+                        <Typography variant='h5' sx={{ fontWeight: '700' }}>
+                          Comments
+                        </Typography>
+
+                        <LoadingButton
+                          variant='contained'
+                          sx={{ textTransform: 'none' }}
+                          onClick={handleSubmit}
+                          loading={isLoading}
+                          disabled={isLoading}
+                        >
+                          Add a Comment
+                        </LoadingButton>
+                      </Box>
+                      <Box
+                        sx={{
+                          border: '1px solid rgb(118, 118, 118)',
+                          // borderBottomColor: 'transparent',
+                          padding: '15px',
+                          marginBottom: '-2px'
+                        }}
+                      >
+                        <Typography variant='h6' sx={{ fontSize: '16px !important' }}>
+                          There are no comments.
+                        </Typography>
+                      </Box>
+                      <Box>
+                        <CommentTextarea callback={setTextareaValue} value={textareaValue} />
+                      </Box>
+                    </Box>
+                  </MenuItem>
+                )}
+              />
+              <ControlledIconMenuButton
+                icon={<MoreVertSharpIcon sx={theme => ({ color: theme.palette.grey['A200'] })} />}
+                renderMenuItems={closeMenu => [
+                  <MenuItem key='z1234' onClick={closeMenu}>
+                    Connect your data...
+                  </MenuItem>,
+                  <MenuItem key='z2345' onClick={closeMenu}>
+                    Edit...
+                  </MenuItem>,
+                  <MenuItem key='z3456' onClick={closeMenu}>
+                    Share
+                  </MenuItem>,
+                  <MenuItem key='z4567' onClick={closeMenu}>
+                    Download as
+                  </MenuItem>,
+                  <MenuItem key='z5678' onClick={closeMenu}>
+                    About this Tool
+                  </MenuItem>,
+                  <MenuItem key='z6789' onClick={closeMenu}>
+                    Remove from Dashboard
+                  </MenuItem>
+                ]}
+              />
+            </Box>
           }
           sx={{
             padding: 0,

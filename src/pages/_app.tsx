@@ -22,6 +22,7 @@ import ThemeComponent from 'src/@core/theme/ThemeComponent'
 import themeConfig from 'src/configs/themeConfig'
 
 import { Settings } from 'src/@core/theme/ThemeComponent'
+import { Toaster } from 'react-hot-toast'
 
 const clientSideEmotionCache = createEmotionCache()
 
@@ -44,7 +45,10 @@ export default function App({ Component, emotionCache = clientSideEmotionCache, 
   const getLayout = Component.getLayout ?? ((page: any) => <BlankLayout>{page}</BlankLayout>)
   return (
     <CacheProvider value={emotionCache}>
-      <ThemeComponent settings={themeSettings}>{getLayout(<Component {...pageProps} />)}</ThemeComponent>
+      <ThemeComponent settings={themeSettings}>
+        <Toaster position='top-right' toastOptions={{ className: 'react-hot-toast', duration: 3 }} />
+        {getLayout(<Component {...pageProps} />)}
+      </ThemeComponent>
     </CacheProvider>
   )
 }
