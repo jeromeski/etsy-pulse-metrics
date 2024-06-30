@@ -16,6 +16,7 @@ import PsychologyAltIcon from '@mui/icons-material/PsychologyAlt'
 
 //**Util Imports
 import fakeFetch from 'src/@core/utils/fakeFetch'
+import useDeviceSizesMediaQuery from 'src/hooks/useDeviceSizesMediaQuery'
 
 // **Vendor Imports
 import toast from 'react-hot-toast'
@@ -24,6 +25,7 @@ const TrendGraphMonitorTileAction = () => {
   const [textareaValue, setTextareaValue] = useState<string>('')
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [isSuccess, setIsSuccess] = useState<boolean>(false)
+  const { isMobileXs, isMobileS, isMobileM } = useDeviceSizesMediaQuery()
 
   const handleSubmit =
     (callback: () => void) =>
@@ -62,7 +64,17 @@ const TrendGraphMonitorTileAction = () => {
             }}
           >
             <form onSubmit={handleSubmit(closeMenu)}>
-              <Box sx={{ display: 'column', width: '350px', height: 'auto', overflowY: 'hidden' }}>
+              <Box
+                sx={{
+                  display: 'column',
+                  width: {
+                    xs: isMobileXs || isMobileS ? '255px' : isMobileM ? '300px' : '350px',
+                    sm: '350px'
+                  },
+                  height: 'auto',
+                  overflowY: 'hidden'
+                }}
+              >
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
                   <Typography variant='h5' sx={{ fontWeight: '700' }}>
                     Comments
@@ -70,7 +82,13 @@ const TrendGraphMonitorTileAction = () => {
 
                   <LoadingButton
                     variant='contained'
-                    sx={{ textTransform: 'none' }}
+                    sx={{
+                      textTransform: 'none',
+                      padding: {
+                        xs: '5px 10px',
+                        sm: '10px 20px'
+                      }
+                    }}
                     type='submit'
                     loading={isLoading}
                     disabled={isLoading || !textareaValue}

@@ -159,3 +159,66 @@ Each metric includes a `name`, `period`, `values`, `title`, and `description`, w
 This is a simplified example, and in a real-world scenario, you may need to handle authentication, pagination, error checking, and more based on the specifics of your implementation and requirements.
 
 GET /v14.0/{page-id}/insights?metric=page_fans_country,page_fans_city,page_fans_locale
+
+Sure! Below is an example of a real-world HTTP GET response for the "Page Engaged Users" metric from a Facebook API endpoint. This example is simplified for clarity.
+
+### Example HTTP GET Request
+```http
+GET /v12.0/{page-id}/insights/page_engaged_users?access_token={access-token}&since=2024-06-01&until=2024-06-30
+```
+
+### Example HTTP GET Response
+```json
+{
+  "data": [
+    {
+      "name": "page_engaged_users",
+      "period": "day",
+      "values": [
+        {
+          "value": 120,
+          "end_time": "2024-06-01T07:00:00+0000"
+        },
+        {
+          "value": 130,
+          "end_time": "2024-06-02T07:00:00+0000"
+        },
+        // ... more daily data ...
+        {
+          "value": 150,
+          "end_time": "2024-06-30T07:00:00+0000"
+        }
+      ],
+      "title": "Daily Page Engaged Users",
+      "description": "Daily count of unique users who engaged with the Page."
+    }
+  ],
+  "paging": {
+    "previous": "https://graph.facebook.com/v12.0/{page-id}/insights/page_engaged_users?access_token={access-token}&since=2024-05-31&until=2024-06-29",
+    "next": "https://graph.facebook.com/v12.0/{page-id}/insights/page_engaged_users?access_token={access-token}&since=2024-06-02&until=2024-07-01"
+  }
+}
+```
+
+### Breakdown of the Response
+
+1. **data**: An array containing the requested metric data.
+   - **name**: The name of the metric ("page_engaged_users").
+   - **period**: The period for each data point (e.g., "day" for daily data).
+   - **values**: An array of data points.
+     - **value**: The number of unique users who engaged with the Page on that day.
+     - **end_time**: The end time for the data point, in ISO 8601 format.
+   - **title**: A human-readable title for the metric.
+   - **description**: A description of what the metric represents.
+
+2. **paging**: Information for pagination to retrieve previous or next sets of data.
+   - **previous**: A URL to get the previous set of data.
+   - **next**: A URL to get the next set of data.
+
+### Usage Notes
+
+- **Access Token**: Replace `{access-token}` with a valid access token to authenticate the request.
+- **Page ID**: Replace `{page-id}` with the actual ID of the Facebook Page you are querying.
+- **Date Range**: The `since` and `until` parameters specify the date range for the data.
+
+This response format allows you to programmatically retrieve and analyze engagement data for a Facebook Page, enabling detailed insights and reporting.

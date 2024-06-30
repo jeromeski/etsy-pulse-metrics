@@ -2,15 +2,15 @@
 import { useEffect, useRef } from 'react'
 
 // **Mui Imports
-import { styled } from '@mui/material'
+import { styled, Theme } from '@mui/material'
 import TextareaAutosize from '@mui/base/TextareaAutosize'
 
-const CommentTextAreaWrapper = styled(TextareaAutosize)({
+const CommentTextAreaWrapper = styled(TextareaAutosize)(({ theme }: { theme: Theme }) => ({
   width: '100%',
-  height: '100%',
+  height: 'auto',
   padding: '10px 15px',
   fontSize: '18px'
-})
+}))
 
 interface CommentTextareaProps {
   value: string

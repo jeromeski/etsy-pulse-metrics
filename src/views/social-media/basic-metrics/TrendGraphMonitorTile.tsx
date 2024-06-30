@@ -58,7 +58,7 @@ const TrendGraphMonitorTile = ({
 }: TrendGraphMonitorTileProps) => {
   console.log(graphData)
   return (
-    <Card sx={{ padding: '15px 15px 0 15px', height: '100%', width: '100%' }}>
+    <Card sx={{ padding: '15px 15px 0 15px', height: '100%', width: '100%', borderRadius: '5px' }}>
       {title && (
         <CardHeader
           title={<TitleCardHeader size='medium'>{title}</TitleCardHeader>}
