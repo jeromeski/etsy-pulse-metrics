@@ -86,3 +86,53 @@ curl -i -X GET "https://graph.facebook.com/v11.0/{post-id}/insights?metric=post_
   - **Totals Metrics:** Useful for short-term analysis, identifying trends, and making periodic comparisons.
 
 By understanding these differences, you can choose the appropriate metrics to measure and analyze your Facebook content’s performance effectively.
+
+```
+  {
+    "name": "post_clicks",
+    "period": "lifetime",
+    "values": [
+      {
+        "value": 3300
+      }
+    ],
+    "title": "Lifetime Post Clicks",
+    "description": "The number of clicks on your post."
+  },
+  {
+    "name": "post_reactions_like_total",
+    "period": "lifetime",
+    "values": [
+      {
+        "value": 5120
+      }
+    ],
+    "title": "Lifetime Likes",
+    "description": "The number of 'like' reactions on your post."
+  },
+  {
+    "name": "post_comments",
+    "period": "lifetime",
+    "values": [
+      {
+        "value": 5220
+      }
+    ],
+    "title": "Lifetime Comments",
+    "description": "The number of comments on your post."
+  },
+  {
+    "name": "post_shares",
+    "period": "lifetime",
+    "values": [
+      {
+        "value": 4910
+      }
+    ],
+    "title": "Lifetime Shares",
+    "description": "The number of shares of your post."
+  }
+```
+```
+GET /v14.0/{page-id}/insights?metric=page_fans_country,page_fans_city,page_fans_locale
+```
