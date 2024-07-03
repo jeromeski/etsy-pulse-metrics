@@ -12,19 +12,7 @@ import MetricTotalHeading from 'src/@core/components/typography/metric-total-hea
 import TitleCardHeader from 'src/@core/components/typography/title-card-header'
 import TrendPercentageIndicator from 'src/@core/components/typography/trend-percentage-indicator'
 import CustomDescLabel from 'src/@core/components/typography/custom-desc-label'
-import TrendGraphMonitorTileAction from './TrendGraphMonitorTileAction'
-
-// **Util Imports
-import useDeviceSizesMediaQuery from 'src/hooks/useDeviceSizesMediaQuery'
-
-interface FbMetrics30dProps {
-  id: string
-  title: string
-  keyMetricValue: string
-  growth: string
-  likesComparisonDays: string
-  iconURL: string
-}
+import TrendGraphTileActions from './TrendGraphTileActions'
 
 interface FbGraphData30dProps {
   date: string
@@ -56,13 +44,12 @@ const TrendGraphMonitorTile = ({
   dataKey,
   stackId
 }: TrendGraphMonitorTileProps) => {
-  console.log(graphData)
   return (
     <Card sx={{ padding: '15px 15px 0 15px', height: '100%', width: '100%', borderRadius: '5px' }}>
       {title && (
         <CardHeader
           title={<TitleCardHeader size='medium'>{title}</TitleCardHeader>}
-          action={<TrendGraphMonitorTileAction />}
+          action={<TrendGraphTileActions />}
           sx={{
             padding: 0,
             marginBottom: '20px'

@@ -31,6 +31,11 @@ import {
 import { WORLD_CONFIG_OPTS } from './MAP_CONFIG_DATA'
 import { SOCMED_VISITS_COUNTRIES } from './SOCMED_VISITS_COUNTRIES_METRICS'
 import { SIMPLE_SOCMED_FB_DATA90 } from './SOCMED_FB_DATA'
+import PAGE_IMPRESSIONS from './fb_page_impressions.json'
+import POST_ENGAGEMENTS from './fb_post_engagements.json'
+import POST_IMPRESSIONS from './fb_post_impressions.json'
+import POST_COMMENTS from './fb_post_reactions_comments.json'
+import POST_LIKES from './fb_post_reactions_likes.json'
 
 export {
   facebookDailyData,
@@ -56,5 +61,10 @@ export {
   SIMPLE_SOCMED_CARD_METRICS,
   WORLD_CONFIG_OPTS,
   SOCMED_VISITS_COUNTRIES,
-  SIMPLE_SOCMED_FB_DATA90
+  SIMPLE_SOCMED_FB_DATA90,
+  POST_IMPRESSIONS,
+  POST_ENGAGEMENTS,
+  POST_LIKES,
+  POST_COMMENTS,
+  PAGE_IMPRESSIONS
 }

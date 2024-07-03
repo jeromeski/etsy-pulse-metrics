@@ -1,15 +1,21 @@
 const fs = require('fs/promises')
 
-async function sortJsonData() {
+const sortDataToLatest = data => {
+  // Sort the values array based on end_time in ascending order
+  data[0].values.sort((a, b) => new Date(b.end_time) - new Date(a.end_time))
+}
+
+const aggregateValue = n => {
+  data[0].values.slice(0, n).reduce((accumulator, currentValue) => accumulator + currentValue.value, 0)
+}
+
+async function getJsonData() {
   try {
     // Read the JSON file
     const data = await fs.readFile('post_reactions_likes_2023d.json', 'utf8')
 
     // Parse the JSON data
     let jsonData = JSON.parse(data)
-
-    // Sort the values array based on end_time in ascending order
-    jsonData[0].values.sort((a, b) => new Date(b.end_time) - new Date(a.end_time))
 
     // Write the sorted data to a new JSON file
     fs.writeFile('sorted_data.json', JSON.stringify(jsonData, null, 2), err => {
@@ -23,4 +29,4 @@ async function sortJsonData() {
     console.log(error)
   }
 }
-sortJsonData()
+getJsonData()

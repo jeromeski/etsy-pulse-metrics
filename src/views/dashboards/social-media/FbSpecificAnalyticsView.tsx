@@ -1,10 +1,14 @@
 // **React Imports
 import { useEffect, useState } from 'react'
 
-import { Box } from '@mui/material'
+// **Vendor Imports
+import { useLogger } from 'react-use'
+
 import TrendGraphMonitorTile from 'src/views/social-media/basic-metrics/TrendGraphMonitorTile'
 // **Data Imports
 import { SIMPLE_SOCMED_CARD_METRICS, SIMPLE_SOCMED_FB_DATA90 } from 'src/views/social-media/data'
+import useAggregateValues from 'src/hooks/social-media/useAggregateTotals'
+import useGrowthTrend from 'src/hooks/social-media/useGrowthTrend'
 
 interface FbMetrics30dProps {
   id: string
@@ -27,28 +31,25 @@ interface FbGraphData30dProps {
 }
 
 const FbSpecificAnalyticsView = () => {
+  // useLogger('FbSpecificAnalyticsView')
   const [metrics, setMetrics] = useState<FbMetrics30dProps[] | []>([])
   const [graphData, setGraphData] = useState<FbGraphData30dProps[] | []>([])
   const [total, setTotal] = useState<number>(0)
-  useEffect(() => {
-    try {
-      if (SIMPLE_SOCMED_CARD_METRICS && SIMPLE_SOCMED_FB_DATA90) {
-        const fbMetrics30d: FbMetrics30dProps[] = SIMPLE_SOCMED_CARD_METRICS.slice(0, 1)
-        const fbGraphData30d: FbGraphData30dProps[] = SIMPLE_SOCMED_FB_DATA90.slice(0, 30)
-        new Promise<number>((resolve, reject) => {
-          const total = fbGraphData30d.reduce((acc, currentVal) => acc + currentVal.postLikes, 0)
-          resolve(total)
-        }).then(total => {
-          if (total) setTotal(total)
-        })
+  const { getTotalValue, isLoading, totalValues, slicedData } = useAggregateValues()
+  const { trendValues, getGrowthTrend } = useGrowthTrend()
 
-        setMetrics(fbMetrics30d)
-        setGraphData(fbGraphData30d)
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  }, [])
+  useEffect(() => {
+    let isMounted = true
+    try{
+      getTotalValue()
+      getGrowthTrend()
+    }catch(error){}
+  },[])
+
+  useEffect(() => {
+    // console.log(`slicedData: ${slicedData}`, `totalValues: ${totalValues}`, `trendValue: ${trendValues}`)
+    console.log(trendValues)
+  },[slicedData, totalValues, trendValues])
   if (metrics) {
     return (
       <TrendGraphMonitorTile
