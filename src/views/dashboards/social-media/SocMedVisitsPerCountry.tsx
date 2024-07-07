@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 
 // ** MUI Imports
-import { Card, Box, CardContent, IconButton } from '@mui/material'
+import { Card, Box, CardContent, IconButton, Divider } from '@mui/material'
 
 // ** Icons Imports
 import DotsVertical from 'mdi-material-ui/DotsVertical'
@@ -10,6 +10,8 @@ import DotsVertical from 'mdi-material-ui/DotsVertical'
 // ** Custom Component Imports
 import SocMedVisitsPerCountryItem from 'src/views/social-media/visits-per-country/SocMedVisitsPerCountryItem'
 import CustomHeaderTitleLg from 'src/@core/components/typography/custom-header-title-lg'
+import CardControlledComment from 'src/@core/components/card-controlled-comment'
+
 
 // **Type Imports
 import { DataType } from 'src/views/social-media/types'
@@ -36,19 +38,12 @@ const SocMedVisitsPerCountry = () => {
   }, [])
 
   return (
-    <Card sx={{ padding: '1rem 1.5rem 1rem 1.5rem', height: '100%, width: 100%' }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-        <CustomHeaderTitleLg>Visits Per Country</CustomHeaderTitleLg>
-        <IconButton size='small' aria-label='settings' className='card-more-options' sx={{ color: 'text.secondary' }}>
-          <DotsVertical />
-        </IconButton>
-      </Box>
-      <CardContent>
-        {countriesData?.map((item: DataType, index: number, array) => {
+    <CardControlledComment title='Visits Per Country' subtitle='Fb audience views' sx={{ '& .MuiCardHeader-root': {paddingBottom: '5px'}, '& .MuiCardContent-root': {paddingBottom: '5px'}}}>
+      <Divider sx={{padding: 0, margin: '0 0 10px 0'}}/>
+      { countriesData?.map((item: DataType, index: number, array) => {
           return <SocMedVisitsPerCountryItem key={item.id} item={item} index={index} _data={array} />
-        })}
-      </CardContent>
-    </Card>
+      })}
+    </CardControlledComment>
   )
 }
 

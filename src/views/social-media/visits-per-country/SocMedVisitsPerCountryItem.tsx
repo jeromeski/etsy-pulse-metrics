@@ -21,7 +21,7 @@ const SocMedVisitsPerCountryItem: React.FC<VisitsPerCountryItemProps> = ({ item,
       sx={{
         display: 'flex',
         alignItems: 'center',
-        marginBottom: index !== _data.length - 1 ? 5 : undefined
+        marginBottom: '10px'
       }}
     >
       <CustomAvatar skin='light' color={item.avatarColor} sx={{ mr: 3, fontSize: '1.125rem' }}>

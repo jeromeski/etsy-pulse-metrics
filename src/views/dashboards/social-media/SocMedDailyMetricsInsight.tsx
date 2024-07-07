@@ -2,12 +2,11 @@
 import React, { useState } from 'react'
 
 // **Mui Imports
-import { Box, Card, CardContent } from '@mui/material'
+import { Divider } from '@mui/material'
 
 // **Custom Component Imports
 import SocialChannelsList from 'src/views/social-media/likes-trend/SocialChannelsList'
-import ButtonSkipController from 'src/@core/components/button-skip-controller'
-import CustomHeaderTitleLg from 'src/@core/components/typography/custom-header-title-lg'
+import CardControlledSkip from 'src/@core/components/card-controlled-skip'
 
 // **Type Imports
 import { DailySocialData } from 'src/views/social-media/types'
@@ -40,29 +39,23 @@ const SocMedDailyMetricsInsight = () => {
   }
 
   return (
-    <Card>
-      <Box
-        sx={{
-          padding: '15px 20px 0 20px',
-          display: 'flex',
-          flexDirection: {
-            xs: 'column',
-            sm: 'row'
-          },
-          justifyContent: 'space-between'
-        }}
-      >
-        <CustomHeaderTitleLg>Daily Facebook Metrics Report</CustomHeaderTitleLg>
-        <ButtonSkipController
-          data={`Day of ${day}`}
-          increaseCountHandler={increaseDayHandler}
-          decreaseCountHandler={decreaseDayHandler}
-        />
-      </Box>
-      <CardContent>
-        <SocialChannelsList facebook={facebook} instagram={instagram} twitter={twitter} youtube={youtube} />
-      </CardContent>
-    </Card>
+    <CardControlledSkip
+      title='Social Media Key Metrics'
+      subtitle='Total Daily Information'
+      day={day}
+      increaseDayHandler={increaseDayHandler}
+      decreaseDayHandler={decreaseDayHandler}
+      sx={{'& .MuiCardHeader-root': {
+          paddingBottom: '5px'
+        },
+        '& .MuiCardContent-root': {
+          paddingBottom: '10px'
+        }
+      }}
+    >
+      <Divider sx={{padding:0,  margin:0, mb: '5px'}}/>
+      <SocialChannelsList facebook={facebook} instagram={instagram} twitter={twitter} youtube={youtube} />
+    </CardControlledSkip>
   )
 }
 

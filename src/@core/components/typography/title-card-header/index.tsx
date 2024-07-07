@@ -3,6 +3,9 @@ import React from 'react'
 // **Mui Imports
 import { Typography } from '@mui/material'
 
+// **Util Imports
+import useDeviceSizesMediaQuery from 'src/hooks/useDeviceSizesMediaQuery'
+
 interface TitleCardHeaderProps {
   size: 'large' | 'medium' | 'small'
   children: React.ReactNode
@@ -35,7 +38,8 @@ interface TextSizeProps {
 
 const TitleCardHeader: React.FC<TitleCardHeaderProps> = ({ size, children }) => {
   const titleSize = textSizes[size]
-
+  const {isMobileXs, isMobileS} = useDeviceSizesMediaQuery()
+  const fullText = children
   return (
     <Typography
       variant='h2'
@@ -46,7 +50,7 @@ const TitleCardHeader: React.FC<TitleCardHeaderProps> = ({ size, children }) => 
         fontSize: { ...titleSize }
       })}
     >
-      {children}
+      {fullText}
     </Typography>
   )
 }

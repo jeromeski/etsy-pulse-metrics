@@ -1,16 +1,12 @@
 // **Mui Imports
 import { Grid, Box } from '@mui/material'
-// import SocMedOverviewContainer from 'src/views/social-media/overview'
-// import SocMedAreaChartContainer from 'src/views/social-media/area-chart'
-// import SocMedMetricsContainer from 'src/views/social-media/basic-metrics'
-// import FacebookDetailedAnalytics from 'src/views/social-media/detailed-analytics/facebook'
-import useDeviceSizesMediaQuery from 'src/hooks/useDeviceSizesMediaQuery'
-// import MetricTrendGraphMonitorTile from 'src/views/social-media/basic-metrics/TrendGraphMonitorTile'
-// import fakeFetch from 'src/@core/utils/fakeFetch'
-// import toast from 'react-hot-toast'
-// import { useState } from 'react'
+// **Custom Components
 import SocMedDailyImpressionsChart from 'src/views/dashboards/social-media/SocMedDailyImpressionsChart'
 import SocMedEngagementBarChart from 'src/views/dashboards/social-media/SocMedEngagementBarChart'
+import SocMedVisitsPerCountry from 'src/views/dashboards/social-media/SocMedVisitsPerCountry'
+import SocMedDailyMetricsInsight from 'src/views/dashboards/social-media/SocMedDailyMetricsInsight'
+// **Hooks Imports
+import useDeviceSizesMediaQuery from 'src/hooks/useDeviceSizesMediaQuery'
 
 const Home = () => {
   const { isSmallScreen } = useDeviceSizesMediaQuery()
@@ -23,10 +19,16 @@ const Home = () => {
       <Grid item xs={12} lg={10}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
+            <SocMedDailyMetricsInsight />
+          </Grid>
+          <Grid item xs={12}>
             <SocMedEngagementBarChart />
           </Grid>
           <Grid item xs={12}>
             <SocMedDailyImpressionsChart />
+          </Grid>
+          <Grid item xs={12}>
+            <SocMedVisitsPerCountry />
           </Grid>
         </Grid>
       </Grid>

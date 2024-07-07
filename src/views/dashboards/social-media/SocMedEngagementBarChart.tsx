@@ -11,7 +11,6 @@ import { Box, CircularProgress } from '@mui/material'
 import ChartLegend from 'src/@core/components/chart-legend'
 import ControlledHorBarChart from 'src/@core/components/recharts/controlled-hor-bar-chart'
 import CardControlledComment from 'src/@core/components/card-controlled-comment'
-import SocMedSharedCard from 'src/views/social-media/shared-card'
 
 // ** Utils Import
 import useDeviceSizesMediaQuery from 'src/hooks/useDeviceSizesMediaQuery'
@@ -82,7 +81,7 @@ const SocMedEngagementBarChart = () => {
             <ChartLegend color='#4267B2'>Comments</ChartLegend>
             <ChartLegend color='#8b9dc3'>Shares</ChartLegend>
           </Box>
-          <Box sx={{height: '175px', width: '100%'}}>
+          <Box sx={{height: 'auto', width: '100%'}}>
             <ControlledHorBarChart
             data={chartData}
             barKeys={barKeys}

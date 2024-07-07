@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, styled, CardProps, MenuItem, Theme, SelectChangeEvent } from '@mui/material'
+import { Card, CardContent, CardHeader, styled, CardProps, MenuItem, Theme, SelectChangeEvent, SxProps, Theme } from '@mui/material'
 import TitleCardHeader from 'src/@core/components/typography/title-card-header'
 import ControlledChartSelect from 'src/@core/components/controlled-chart-select'
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
@@ -13,15 +13,13 @@ interface CardActionSelectProps {
   options: OptionProp[]
   selectedValue: string
   children: React.ReactNode
+  sx?:SxProps<Theme>
 }
-
-const CardWrapper = styled(Card)<CardProps>(({ theme }) => ({
-  // You can add custom styles here
-}))
 
 const renderOptions = (options: OptionProp[]) =>
   options.map(option => (
-    <MenuItem key={option.id} value={option.value}>
+    <MenuItem key={option.id} value={option.value} 
+      sx={{ fontSize: {xs: '13px !important', md: '14px !important'}}}>
       <CalendarTodayIcon
         sx={(theme: Theme) => ({
           marginRight: '1rem',
@@ -41,10 +39,11 @@ const CardControlledSelect: React.FC<CardActionSelectProps> = ({
   handleChange,
   options,
   selectedValue,
+  sx,
   children
 }) => {
   return (
-    <CardWrapper>
+    <Card sx={sx}>
       {title && (
         <CardHeader
           title={<TitleCardHeader size='medium'>{title}</TitleCardHeader>}
@@ -61,7 +60,7 @@ const CardControlledSelect: React.FC<CardActionSelectProps> = ({
         />
       )}
       <CardContent>{children}</CardContent>
-    </CardWrapper>
+    </Card>
   )
 }
 

@@ -1,5 +1,5 @@
 // **Mui Imports
-import { Select, MenuItem, SelectProps, SelectChangeEvent } from '@mui/material'
+import { Select, MenuItem, SelectProps, SelectChangeEvent, styled } from '@mui/material'
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
 
 // **Type Imports
@@ -13,6 +13,7 @@ interface ControlledChartSelectType extends Omit<SelectProps<string>, 'children'
   renderOptions: RenderProp
   placeholder?: string
 }
+
 
 const ControlledChartSelect = ({
   renderOptions,
@@ -30,18 +31,34 @@ const ControlledChartSelect = ({
         height: '2rem',
         '& .MuiSelect-select': {
           display: 'flex',
-          alignItems: 'center'
-        }
+          alignItems: 'center',
+          fontSize: {
+            xs: '13px !important',
+            md: '14px !important',
+          }          
+        },
+        padding: '0px'
       }}
     >
       {placeholder && (
-        <MenuItem value='' disabled={!!value} sx={{ display: 'flex', alignItems: 'center' }}>
+        <MenuItem
+          value=''
+          disabled={!!value}
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            fontSize: {
+              xs: '14px !important',
+              md: '15px !important',
+            }
+          }}
+        >
           <CalendarTodayIcon
             sx={theme => ({
               marginRight: '1rem',
-              fontSize: '1rem',
+              fontSize: '14px',
               [theme.breakpoints.up('md')]: {
-                fontSize: '1.25rem'
+                fontSize: '15px'
               }
             })}
           />

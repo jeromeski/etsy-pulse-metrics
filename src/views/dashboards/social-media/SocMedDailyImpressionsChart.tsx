@@ -20,9 +20,9 @@ import { OptionProp, AreaKeyConfig, DailyDataProps } from 'src/views/social-medi
 const initDayRange: string = '90'
 
 const options: OptionProp[] = [
-  { id: '1abcde', value: '90', label: 'last 90 days', title: 'Facebook Daily Likes (90 days)' },
-  { id: '2bcdef', value: '60', label: 'last 60 days', title: 'Facebook Daily Likes (60 days)' },
-  { id: '3cdefg', value: '30', label: 'last 30 days', title: 'Facebook Daily Likes (30 days)' }
+  { id: '1abcde', value: '90', label: 'last 90 days', title: 'Fb Daily Likes (90 days)' },
+  { id: '2bcdef', value: '60', label: 'last 60 days', title: 'Fb Daily Likes (60 days)' },
+  { id: '3cdefg', value: '30', label: 'last 30 days', title: 'Fb Daily Likes (30 days)' }
 ]
 
 const areaKeys: AreaKeyConfig[] = [
@@ -92,17 +92,26 @@ const SocMedDailyImpressionsChart = () => {
     return (
     <CardControlledSelect
       title={getOptionTitle(options, selectedValue)}
-      subtitle='Based on placeholder data'
+      // subtitle='Based on placeholder data'
       handleChange={handleChange}
       options={options}
       selectedValue={selectedValue}
     > 
-      <ChartLegend color='#4267B2'>Post Likes</ChartLegend>
+    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+    <Box
+            sx={{
+              display: 'flex',
+              justifyContent: isSmallScreen ? 'flex-start' : 'flex-end',
+              marginBottom: '10px'
+            }}
+          ><ChartLegend color='#4267B2'>Post Likes</ChartLegend>
+          </Box>
+      
 
       <Box sx={{height: '200px', width: '100%'}}>
         <ControlledAreaChart chartData={chartData} dataKeyXaxis='date' areaKeys={areaKeys} isReferenceLine={true} />
       </Box>
-      
+    </Box>
     </CardControlledSelect>
   )
   } else {

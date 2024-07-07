@@ -29,7 +29,7 @@ const SocialChannelItem = ({ item }: { item: SocialMediaChannelProps }) => {
             flexBasis: '30%'
           }}
           primary={
-            <Typography variant='h6' sx={{ fontSize: '12px', fontWeight: 600, letterSpacing: 0, mb: '0px' }}>
+            <Typography variant='h6' sx={{ fontSize: '16px !important', fontWeight: 600, letterSpacing: 0, mb: '0px' }}>
               {item.name}
             </Typography>
           }
@@ -45,7 +45,7 @@ const SocialChannelItem = ({ item }: { item: SocialMediaChannelProps }) => {
         secondary={'views'}
       />
       <ListItemText sx={{ alignSelf: 'self-start', flexGrow: 0, mt: '10px' }}>
-        <Typography variant='body1' component={'span'} sx={{ fontWeight: 600 }}>
+        <Typography variant='body1' component={'span'} sx={{ fontWeight: 600, fontSize: '15px !important' }}>
           {item.growth}%
         </Typography>
         {item.growth > 0 ? (
