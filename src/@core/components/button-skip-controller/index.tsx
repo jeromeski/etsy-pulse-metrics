@@ -1,6 +1,10 @@
 // **Mui Imports
 import { Box, ButtonGroup, Button, ButtonProps, Typography } from '@mui/material'
 import { styled, Theme } from '@mui/material/styles'
+
+// **Hook Imports
+import useDeviceSizesMediaQuery from 'src/hooks/useDeviceSizesMediaQuery'
+
 // **Icon Imports
 import { ChevronLeft, ChevronRight } from '@mui/icons-material'
 
@@ -68,17 +72,17 @@ interface ButtonSkipControllerType {
 }
 
 const ButtonSkipController = ({ data, increaseCountHandler, decreaseCountHandler }: ButtonSkipControllerType) => {
-  
+  const {isSmallScreen} = useDeviceSizesMediaQuery()
   return (
     <Box sx={{ marginLeft: {xs: 'auto', sm: '0'}}}>
       <StyledButtonGroup size='small' >
-        {data && (
+        {!isSmallScreen && data ? (
           <StyledButton disabled>
             <Typography variant='body2' sx={{ fontWeight: 500 }}>
               {data}
             </Typography>
           </StyledButton>
-        )}
+        ) : <></>}
         <Button onClick={decreaseCountHandler}>
           <ChevronLeft sx={{color: 'grey'}}/>
         </Button>

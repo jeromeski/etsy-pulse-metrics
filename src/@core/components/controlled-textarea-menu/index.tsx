@@ -116,7 +116,9 @@ const ControlledTextAreaMenu = () => {
           </MenuItemWrapper>
         )}
       />
-      <ControlledIconMenuButton
+      <ControlledIconMenuButton sx={{ '& .MuiButtonBase-root,& .MuiIconButton-root, & .MuiIconButton-sizeSmall': {
+        paddingRight: {xs: '0px !important'}
+      }}}
         icon={<MoreVertSharpIcon sx={theme => ({ color: theme.palette.grey['A200'] })} />}
         renderMenuItems={closeMenu => [
           <MenuItem key='z1234' sx={{ fontSize: '15px !important' }} onClick={closeMenu}>

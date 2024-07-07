@@ -29,23 +29,41 @@ const SocialChannelItem = ({ item }: { item: SocialMediaChannelProps }) => {
             flexBasis: '30%'
           }}
           primary={
-            <Typography variant='h6' sx={{ fontSize: '16px !important', fontWeight: 600, letterSpacing: 0, mb: '0px' }}>
+            <Typography variant='h6' sx={{ fontSize: {
+              xs: '14px', sm: '15px', md: '16px'
+            }, fontWeight: 600, letterSpacing: 0, mb: '0px' }}>
               {item.name}
             </Typography>
           }
-          secondary={item.desc}
+          secondary={
+            <Typography variant='body1' sx={{ fontSize: {
+              xs: '12px', sm: '13px', md: '14px'
+            } }}>
+            {item.desc}
+          </Typography>
+          }
         />
       )}
       <ListItemText
         primary={
-          <Typography variant='body1' sx={{ fontSize: 13 }}>
+          <Typography variant='body1' sx={{ fontSize: {
+              xs: '12px', sm: '13px', md: '14px'
+            } }}>
             &nbsp;&nbsp;{item.budget}
           </Typography>
         }
-        secondary={'views'}
+        secondary={
+          <Typography variant='body1' sx={{ fontSize: {
+              xs: '12px', sm: '13px', md: '14px'
+            } }}>
+            views
+          </Typography>
+        }
       />
       <ListItemText sx={{ alignSelf: 'self-start', flexGrow: 0, mt: '10px' }}>
-        <Typography variant='body1' component={'span'} sx={{ fontWeight: 600, fontSize: '15px !important' }}>
+        <Typography variant='body1' component={'span'} sx={{ fontWeight: 600, fontSize: {
+              xs: '13px', sm: '14px', md: '15px'
+          } }}>
           {item.growth}%
         </Typography>
         {item.growth > 0 ? (

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { Box, IconButton, Menu, MenuItem } from '@mui/material'
+import { Box, IconButton, Menu, MenuItem, SxProps, Theme } from '@mui/material'
 
 interface ControlledIconMenuButtonProps {
   setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>
   isLoading?: boolean | null
   icon: React.ReactNode
   renderMenuItems?: ((closeMenu: () => void) => React.ReactNode | React.ReactElement) | undefined | void
-  renderCommentItem?: ((closeMenu: () => void) => React.ReactNode | React.ReactElement) | undefined | void
+  renderCommentItem?: ((closeMenu: () => void) => React.ReactNode | React.ReactElement) | undefined | void,
+  sx?: SxProps<Theme>
 }
 
 const ControlledIconMenuButton: React.FC<ControlledIconMenuButtonProps> = ({
@@ -14,7 +15,8 @@ const ControlledIconMenuButton: React.FC<ControlledIconMenuButtonProps> = ({
   renderMenuItems,
   renderCommentItem,
   isLoading,
-  setIsLoading
+  setIsLoading,
+  sx
 }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const [commentActive, setCommentActive] = useState(false)
@@ -44,7 +46,7 @@ const ControlledIconMenuButton: React.FC<ControlledIconMenuButtonProps> = ({
   }, [isLoading, commentActive, setIsLoading])
 
   return (
-    <Box>
+    <Box sx={sx}>
       <IconButton size='small' sx={{ paddingTop: 0, paddingBottom: 0 }} onClick={handleClick} id='icon-button'>
         {icon}
       </IconButton>
