@@ -4,6 +4,7 @@ import React from 'react'
 // **Vendor Imports
 import { ThemeColor } from 'src/@core/layouts/types'
 import { ApexOptions } from 'apexcharts'
+import { CurveType } from 'recharts/types/shape/Curve'
 
 export interface FacebookDailyData {
   _id: string
@@ -13,7 +14,6 @@ export interface FacebookDailyData {
   growth: number
 }
 
-
 export interface FacebookMonthlyData {
   _id: string
   month: string
@@ -22,7 +22,6 @@ export interface FacebookMonthlyData {
   shares: number
   engagementRate: number
 }
-
 
 export interface FacebookYearlyStats {
   totalLikes: number
@@ -44,7 +43,6 @@ export interface InstagramDailyData {
   growth: number
 }
 
-
 export interface InstagramMonthlyData {
   _id: string
   month: string
@@ -54,7 +52,6 @@ export interface InstagramMonthlyData {
   reach: number
   engagementRate: number
 }
-
 
 export interface InstagramYearlyStats {
   totalLikes: number
@@ -77,7 +74,6 @@ export interface YoutubeDailyData {
   growth: number
 }
 
-
 export interface YoutubeMonthlyData {
   _id: string
   month: string
@@ -86,7 +82,6 @@ export interface YoutubeMonthlyData {
   views: number
   subscribers: number
 }
-
 
 export interface YoutubeYearlyStats {
   totalLikes: number
@@ -108,7 +103,6 @@ export interface TwitterDailyData {
   growth: number
 }
 
-
 export interface TwitterMonthlyData {
   _id: string
   month: string
@@ -118,7 +112,6 @@ export interface TwitterMonthlyData {
   clicks: number
   engagementRate: number
 }
-
 
 export interface TwitterYearlyStats {
   totalLikes: number
@@ -148,18 +141,9 @@ export interface DailySocialData {
 export interface SocMedMetricsItem {
   id: string
   title: string
-  keyMetricValue: string
-  growth: string
-  likesComparisonDays: string
-  iconURL: string
-}
-
-export interface SocMedMetricsItem {
-  id: string
-  title: string
-  keyMetricValue: string
-  growth: string
-  likesComparisonDays: string
+  keyMetricValue: number
+  growth?: number
+  compareDays?: number
   iconURL: string
 }
 
@@ -177,9 +161,9 @@ export interface DataType {
 
 export interface BasicMetricCardsProps {
   title: string
-  keyMetricValue: string
-  likesComparisonDays: string
-  growth: string
+  keyMetricValue: string | number
+  compareDays: string | number
+  growth: string | number
 }
 
 export interface TotalVisitorsWidgetProps {
@@ -221,5 +205,69 @@ export type OptionProp = {
   id?: string
   value: string
   label: string
-  title: string
+  title?: string
+}
+
+export interface DailyDataProps {
+  date: string
+  post_likes: number
+  comments: number
+  shares: number
+  reach: number
+  engagement_rate: number
+  impressions: number
+  trend_likes: number
+  trend_engagements: number
+  trend_impressions: number
+  trend_reach: number
+  growth_likes: number
+  growth_engagements: number
+  compareDays: number
+  prevDate: string
+  engagements: number
+}
+
+export interface DataProps {
+  date: string
+  total_likes: number
+  total_comments: number
+  total_shares: number
+  total_reach: number
+  engagement_rate: number
+  avg_likes: number
+  avg_comments: number
+  avg_shares: number
+  avg_reach: number
+  impressions: number
+  total_engagements: number
+  trend_likes: number
+  trend_engagements: number
+  trend_impressions: number
+  trend_reach: number
+  growth_likes: number
+  growth_engagements: number
+  compareDays: number
+  prevDate: string
+}
+
+export type GraphDataProp = DailyDataProps | DataProps
+
+export interface AreaKeyConfig {
+  dataKey: string
+  stackId?: string
+  type?: CurveType
+  stroke?: string
+  fill?: string
+  strokeWidth?: number
+}
+
+export interface ControlledAreaChartProps {
+  chartData: any[]
+  direction?: 'ltr' | 'rtl'
+  dataKeyXaxis: string
+  areaKeys: AreaKeyConfig[]
+  tickCount?: number
+  orientation?: 'right' | 'left'
+  reversed?: boolean
+  isReferenceLine?: boolean
 }

@@ -15,14 +15,14 @@ const textSizes = {
     lg: '22px'
   },
   medium: {
-    xs: '16px',
-    sm: '17px',
-    lg: '18px'
-  },
-  small: {
     xs: '14px',
     sm: '15px',
     lg: '16px'
+  },
+  small: {
+    xs: '14px',
+    sm: '14px',
+    lg: '15px'
   }
 }
 

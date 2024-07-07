@@ -36,8 +36,8 @@ const SocMedVisitsPerCountry = () => {
   }, [])
 
   return (
-    <Card sx={{padding: '1rem 1.5rem 1rem 1.5rem', height: '100%, width: 100%' }}>
-      <Box sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start'}}>
+    <Card sx={{ padding: '1rem 1.5rem 1rem 1.5rem', height: '100%, width: 100%' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
         <CustomHeaderTitleLg>Visits Per Country</CustomHeaderTitleLg>
         <IconButton size='small' aria-label='settings' className='card-more-options' sx={{ color: 'text.secondary' }}>
           <DotsVertical />

@@ -15,14 +15,14 @@ import { SIMPLE_SOCMED_FB_DATA90 } from 'src/views/social-media/data'
 import ControlledChartSelect from 'src/@core/components/controlled-chart-select'
 import ControlledAreaChart from 'src/@core/components/recharts/controlled-area-chart'
 import CardAreaChartHeader from 'src/views/social-media/daily-reach-chart/CardAreaChartHeader'
-import CardAreaChartLegend from 'src/views/social-media/daily-reach-chart/CardAreaChartLegend'
-import StackedAreaChart from 'src/views/social-media/overview-chart/StackedAreaChart'
+// import CardAreaChartLegend from 'src/views/social-media/daily-reach-chart/CardAreaChartLegend'
+import ChartLegend from 'src/@core/components/chart-legend'
 
 // ** Hook Imports
 import useDeviceSizesMediaQuery from 'src/hooks/useDeviceSizesMediaQuery'
 
 // ** Type Imports
-import { RenderOptionProp, DirectionProps, OptionProp } from 'src/views/social-media/types'
+import { RenderOptionProp, DirectionProps, OptionProp, AreaKeyConfig } from 'src/views/social-media/types'
 import CustomHeaderTitleLg from 'src/@core/components/typography/custom-header-title-lg'
 
 const initDayRange: string = '90'
@@ -33,7 +33,34 @@ const options3: OptionProp[] = [
   { id: '345cdefgh', value: '30', label: 'last 30 days', title: 'Facebook Key Metrics (30 days)' }
 ]
 
-const SocMedDailyImpressionsChart = ({ direction }: DirectionProps) => {
+const areaKeys: AreaKeyConfig[] = [
+  {
+    dataKey: 'date',
+    type: 'linear',
+    stroke: '#3b5998',
+    stackId: 'post_likes',
+    fill: '#3b5998',
+    strokeWidth: 2
+  },
+  {
+    dataKey: 'date',
+    type: 'linear',
+    stroke: '#4267B2',
+    stackId: 'comments',
+    fill: '#4267B2',
+    strokeWidth: 2
+  },
+  {
+    dataKey: 'date',
+    type: 'linear',
+    stroke: '#8b9dc3',
+    stackId: 'shares',
+    fill: '#8b9dc3',
+    strokeWidth: 2
+  }
+]
+
+const SocMedDailyImpressionsChart = () => {
   // ** States
   const [chartData, setChartData] = useState<any[]>([])
   const [selectedValue, setSelectedValue] = useState<string>(initDayRange)
@@ -115,81 +142,18 @@ const SocMedDailyImpressionsChart = ({ direction }: DirectionProps) => {
       <CardContent>
         {/* Chart Legend */}
         <Box sx={{ display: 'flex' }}>
-          <CardAreaChartLegend sx={{marginRight: '1rem'}}>
-            <Circle
-              sx={(theme: Theme) => ({
-                color: '#3b5c9f',
-                height: 'auto',
-                width: '15px',
-                marginRight: '5px'
-              })}
-            />
-            <Typography
-              variant='body1'
-              sx={(theme: Theme) => ({
-                fontSize: '.9rem'
-              })}
-            >
-              <b>Impressions</b>
-            </Typography>
-          </CardAreaChartLegend>
-          <CardAreaChartLegend sx={{marginRight: '1rem'}}>
-            <Circle
-              sx={(theme: Theme) => ({
-                color: '#4267b2',
-                height: 'auto',
-                width: '15px',
-                marginRight: '5px'
-              })}
-            />
-            <Typography
-              variant='body1'
-              sx={(theme: Theme) => ({
-                fontSize: '.9rem'
-              })}
-            >
-              <b>Engagements</b>
-            </Typography>
-          </CardAreaChartLegend>
-          <CardAreaChartLegend sx={{marginRight: '1rem'}}>
-            <Circle
-              sx={(theme: Theme) => ({
-                color: '#6283c5',
-                height: 'auto',
-                width: '15px',
-                marginRight: '5px'
-              })}
-            />
-            <Typography
-              variant='body1'
-              sx={(theme: Theme) => ({
-                fontSize: '.9rem'
-              })}
-            >
-              <b>Reach</b>
-            </Typography>
-          </CardAreaChartLegend>
+          <ChartLegend color='#3b5998'>Likes</ChartLegend>
+          <ChartLegend color='#4267B2'>Comments</ChartLegend>
+          <ChartLegend color='#8b9dc3'>Shares</ChartLegend>
         </Box>
         {/* Chart Area */}
-        <StackedAreaChart
+        <ControlledAreaChart
           chartData={chartData}
-          direction={direction === 'rtl'}
+          direction='ltr'
           dataKeyXaxis='date'
-          dataKeyArea1='impressions'
-          dataKeyArea2='engagements'
-          dataKeyArea3='reach'
-          stackId1='impressions'
-          stackId2='engagements'
-          stackId3='reach'
-          type='linear'
+          areaKeys={areaKeys}
           tickCount={4}
-          stroke1='#34518d'
-          stroke2='#3b5c9f'
-          stroke3='#4267b2'
-          strokeWidth='3'
-          fill1='#34518d'
-          fill2='#3b5c9f'
-          fill3='#4267b2'
+          orientation='left'
         />
       </CardContent>
     </Card>

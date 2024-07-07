@@ -1,0 +1,30 @@
+import { Box, Card, CardContent, CardHeader, styled, CardProps } from '@mui/material'
+import TitleCardHeader from 'src/@core/components/typography/title-card-header'
+import ControlledTextareaMenu from 'src/@core/components/controlled-textarea-menu'
+
+interface CardActionCommentProps {
+  title: string
+  subtitle?: string
+  children: React.ReactNode
+}
+
+const CardWrapper = styled(Card)<CardProps>({})
+
+const CardControlledComment: React.FC<CardActionCommentProps> = ({ title, subtitle, children }) => {
+  return (
+    <CardWrapper>
+      {title && (
+        <CardHeader
+          title={<TitleCardHeader size='medium'>{title}</TitleCardHeader>}
+          subheader={subtitle} // Use 'subheader' instead of 'subtitle'
+          action={<ControlledTextareaMenu />}
+        />
+      )}
+      <CardContent>
+        {children}
+      </CardContent>
+    </CardWrapper>
+  )
+}
+
+export default CardControlledComment

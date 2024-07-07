@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react'
 import { Card, Box } from '@mui/material'
 
 // **Data Imports
-import { SIMPLE_SOCMED_CARD_METRICS } from 'src/views/social-media/data'
+import { SIMPLE_SOCMED_CARD_METRICS } from 'src/views/social-media/data/SOCMED_FB_DATA'
 
 // **Custom Component Imports
 import SocMedOverviewItem from 'src/views/social-media/overview/SocMedOverviewItem'
@@ -19,7 +19,7 @@ import useDeviceSizesMediaQuery from 'src/hooks/useDeviceSizesMediaQuery'
 import CustomHeaderTitleLg from 'src/@core/components/typography/custom-header-title-lg'
 
 const SocMedOverview = () => {
-  const [metricsData, setMetricsData] = useState<SocMedMetricsItem[] | null>(null)
+  const [metricsData, setMetricsData] = useState<SocMedMetricsItem[]>([])
   const { isMobileXs, isMobileS, isMobileM, isTablet, isLaptop, isLaptopL, isDesktop } = useDeviceSizesMediaQuery()
   useEffect(() => {
     let isMounted = true
@@ -55,16 +55,16 @@ const SocMedOverview = () => {
       })}
     >
       <CustomHeaderTitleLg>Social Media Followers</CustomHeaderTitleLg>
-        <SocMedOverviewList>
-          {metricsData?.map((item: SocMedMetricsItem) => (
-            <SocMedOverviewItem
-              key={item.id}
-              iconURL={item.iconURL}
-              title={item.title}
-              keyMetricValue={item.keyMetricValue}
-            />
-          ))}
-        </SocMedOverviewList>
+      <SocMedOverviewList>
+        {metricsData?.map((item: SocMedMetricsItem) => (
+          <SocMedOverviewItem
+            id={item.id}
+            iconURL={item.iconURL}
+            title={item.title}
+            keyMetricValue={item.keyMetricValue}
+          />
+        ))}
+      </SocMedOverviewList>
     </Card>
   )
 }

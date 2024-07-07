@@ -25,9 +25,9 @@ const TrendPercentageIndicator = ({ growth = -1.2 }: { growth: string | number }
         {growth}%
       </Typography>
       {Number(growth) >= 0 ? (
-        <TrendIcon src='images/icons/trend-icons/ind-triangle-up-green.png' />
+        <TrendIcon src='/images/icons/trend-icons/ind-triangle-up-green.png' />
       ) : (
-        <TrendIcon src='images/icons/trend-icons/ind-triangle-down-red.png' />
+        <TrendIcon src='/images/icons/trend-icons/ind-triangle-down-red.png' />
       )}
     </Box>
   )

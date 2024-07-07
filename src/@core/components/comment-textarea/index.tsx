@@ -9,7 +9,11 @@ const CommentTextAreaWrapper = styled(TextareaAutosize)(({ theme }: { theme: The
   width: '100%',
   height: 'auto',
   padding: '10px 15px',
-  fontSize: '18px'
+  fontSize: '18px',
+  '&:focus': {
+    outline: 'none', // Remove the default outline
+    boxShadow: 'none', // Remove any shadow
+  },
 }))
 
 interface CommentTextareaProps {
@@ -36,7 +40,7 @@ const CommentTextarea: React.FC<CommentTextareaProps> = ({ callback, value }) =>
     }
   }, [callback])
 
-  return <CommentTextAreaWrapper ref={textRef} value={value} minRows={10} />
+  return <CommentTextAreaWrapper ref={textRef} value={value} minRows={5} />
 }
 
 export default CommentTextarea

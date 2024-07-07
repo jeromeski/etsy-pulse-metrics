@@ -16,14 +16,15 @@ import ControlledChartSelect from 'src/@core/components/controlled-chart-select'
 import ControlledAreaChart from 'src/@core/components/recharts/controlled-area-chart'
 import CardAreaChartHeader from 'src/views/social-media/daily-reach-chart/CardAreaChartHeader'
 import CardAreaChartLegend from 'src/views/social-media/daily-reach-chart/CardAreaChartLegend'
+import CustomHeaderTitleLg from 'src/@core/components/typography/custom-header-title-lg'
 
 // ** Hook Imports
 import useDeviceSizesMediaQuery from 'src/hooks/useDeviceSizesMediaQuery'
 
 // ** Type Imports
-import { RenderOptionProp, DirectionProps, OptionProp } from 'src/views/social-media/types'
-import CustomHeaderTitleLg from 'src/@core/components/typography/custom-header-title-lg'
+import { RenderOptionProp, DirectionProps, OptionProp, AreaKeyConfig } from 'src/views/social-media/types'
 
+// ** Constants
 const initDayRange: string = '90'
 
 const options: OptionProp[] = [
@@ -32,7 +33,18 @@ const options: OptionProp[] = [
   { id: '3cdefg', value: '30', label: 'last 30 days', title: 'Facebook Daily Reach (30 days)' }
 ]
 
-const SocMedDailyReachChart = ({ direction }: DirectionProps) => {
+const areaKeys: AreaKeyConfig[] = [
+  {
+    dataKey: 'date',
+    type: 'linear',
+    stroke: '#4267B2',
+    stackId: 'reach',
+    fill: '#4267B2',
+    strokeWidth: 2
+  }
+]
+
+const SocMedDailyReachChart = () => {
   // ** States
   const [chartData, setChartData] = useState<any[]>([])
   const [selectedValue, setSelectedValue] = useState<string>(initDayRange)
@@ -132,17 +144,14 @@ const SocMedDailyReachChart = ({ direction }: DirectionProps) => {
           </Typography>
         </CardAreaChartLegend>
         {/* Chart Area */}
+
         <ControlledAreaChart
           chartData={chartData}
-          direction={direction === 'rtl'}
+          direction='ltr'
           dataKeyXaxis='date'
-          dataKeyArea='reach'
-          stackId='reach'
-          type='linear'
+          areaKeys={areaKeys}
           tickCount={4}
-          stroke='#003bb3'
-          strokeWidth='3'
-          fill='rgb(0,51,187)'
+          orientation='left'
         />
       </CardContent>
     </Card>

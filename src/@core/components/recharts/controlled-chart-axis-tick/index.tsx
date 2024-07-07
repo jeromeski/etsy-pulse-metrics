@@ -1,4 +1,4 @@
-import withUseMediaQuery from 'src/@core/components/with-use-media-query'
+import { format } from 'date-fns'
 
 interface ControlledChartAxisTickType {
   x?: number
@@ -7,43 +7,32 @@ interface ControlledChartAxisTickType {
     value: string
   }
   rotation?: number
-  isXtraSmallScreen?: boolean
   isSmallScreen?: boolean
-  isMediumScreen?: boolean
-  isTabletScreen?: boolean
-  isSmallLaptopScreen?: boolean
-  isLaptopScreen?: boolean
-  isDesktopScreen?: boolean
 }
 
 const ControlledChartAxisTick = ({
   x = 0,
   y = 0,
   payload = { value: '' },
-  isXtraSmallScreen,
   rotation = 0,
   isSmallScreen,
-  isMediumScreen,
-  isTabletScreen,
-  isSmallLaptopScreen,
-  isLaptopScreen,
-  isDesktopScreen
 }: ControlledChartAxisTickType) => {
+  const formattedDate = format(new Date(payload.value), 'MMM d')
   // Determine the rotation angle (e.g., 270 degrees for vertical labels)
   const cx = x
-  const cy = y
+  const cy = y  
 
   return (
     <text
-      style={{ fontSize: isXtraSmallScreen ? '.8rem' : isSmallScreen ? '.8rem' : '1rem' }}
+      style={{ fontSize: isSmallScreen ? '10px' : '12px' }}
       x={cx}
       y={cy}
       transform={`rotate(${rotation} ${cx} ${cy} )`}
       textAnchor='middle'
     >
-      {payload.value}
+      {formattedDate}
     </text>
   )
 }
 
-export default withUseMediaQuery(ControlledChartAxisTick)
+export default ControlledChartAxisTick

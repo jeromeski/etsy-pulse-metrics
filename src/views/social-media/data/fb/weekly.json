@@ -17,9 +17,7 @@
     "trend_impressions": 0,
     "trend_reach": 0,
     "growth_likes": 36,
-    "growth_engagements": 48,
-    "compareDays": 7,
-    "prevDate": "2024-06-23"
+    "growth_engagements": 48
   },
   {
     "date": "2024-06-23",
@@ -39,9 +37,7 @@
     "trend_impressions": 8.2,
     "trend_reach": 5.2,
     "growth_likes": -105,
-    "growth_engagements": -119,
-    "compareDays": 7,
-    "prevDate": "2024-06-16"
+    "growth_engagements": -119
   },
   {
     "date": "2024-06-16",
@@ -61,9 +57,7 @@
     "trend_impressions": 3,
     "trend_reach": 16.1,
     "growth_likes": 73,
-    "growth_engagements": 85,
-    "compareDays": 7,
-    "prevDate": "2024-06-09"
+    "growth_engagements": 85
   },
   {
     "date": "2024-06-09",
@@ -83,9 +77,7 @@
     "trend_impressions": 21.1,
     "trend_reach": 7.6,
     "growth_likes": -115,
-    "growth_engagements": -141,
-    "compareDays": 7,
-    "prevDate": "2024-06-02"
+    "growth_engagements": -141
   },
   {
     "date": "2024-06-02",
@@ -105,9 +97,7 @@
     "trend_impressions": -6.9,
     "trend_reach": 15.3,
     "growth_likes": -75,
-    "growth_engagements": -69,
-    "compareDays": 7,
-    "prevDate": "2024-05-26"
+    "growth_engagements": -69
   },
   {
     "date": "2024-05-26",
@@ -127,9 +117,7 @@
     "trend_impressions": 9.3,
     "trend_reach": -0.8,
     "growth_likes": -33,
-    "growth_engagements": -26,
-    "compareDays": 7,
-    "prevDate": "2024-05-19"
+    "growth_engagements": -26
   },
   {
     "date": "2024-05-19",
@@ -149,9 +137,7 @@
     "trend_impressions": 5.7,
     "trend_reach": 0,
     "growth_likes": 16,
-    "growth_engagements": -15,
-    "compareDays": 7,
-    "prevDate": "2024-05-12"
+    "growth_engagements": -15
   },
   {
     "date": "2024-05-12",
@@ -171,9 +157,7 @@
     "trend_impressions": -1.7,
     "trend_reach": 2.2,
     "growth_likes": 47,
-    "growth_engagements": 42,
-    "compareDays": 7,
-    "prevDate": "2024-05-05"
+    "growth_engagements": 42
   },
   {
     "date": "2024-05-05",
@@ -193,9 +177,7 @@
     "trend_impressions": -11.5,
     "trend_reach": -8.3,
     "growth_likes": 28,
-    "growth_engagements": 27,
-    "compareDays": 7,
-    "prevDate": "2024-04-28"
+    "growth_engagements": 27
   },
   {
     "date": "2024-04-28",
@@ -215,9 +197,7 @@
     "trend_impressions": 15.1,
     "trend_reach": 3.3,
     "growth_likes": -49,
-    "growth_engagements": -47,
-    "compareDays": 7,
-    "prevDate": "2024-04-21"
+    "growth_engagements": -47
   },
   {
     "date": "2024-04-21",
@@ -237,9 +217,7 @@
     "trend_impressions": 2,
     "trend_reach": -5.3,
     "growth_likes": 114,
-    "growth_engagements": 120,
-    "compareDays": 7,
-    "prevDate": "2024-04-14"
+    "growth_engagements": 120
   },
   {
     "date": "2024-04-14",
@@ -259,9 +237,7 @@
     "trend_impressions": 1.7,
     "trend_reach": -1.1,
     "growth_likes": 15,
-    "growth_engagements": -12,
-    "compareDays": 7,
-    "prevDate": "2024-04-07"
+    "growth_engagements": -12
   },
   {
     "date": "2024-04-07",
@@ -281,9 +257,7 @@
     "trend_impressions": -2.8,
     "trend_reach": -1.7,
     "growth_likes": -37,
-    "growth_engagements": -41,
-    "compareDays": 7,
-    "prevDate": "2024-03-31"
+    "growth_engagements": -41
   },
   {
     "date": "2024-03-31",
@@ -303,9 +277,7 @@
     "trend_impressions": -5.5,
     "trend_reach": 7.3,
     "growth_likes": -6,
-    "growth_engagements": -13,
-    "compareDays": 7,
-    "prevDate": "2024-03-24"
+    "growth_engagements": -13
   },
   {
     "date": "2024-03-24",
@@ -325,9 +297,7 @@
     "trend_impressions": 5.8,
     "trend_reach": -5.5,
     "growth_likes": -84,
-    "growth_engagements": -71,
-    "compareDays": 7,
-    "prevDate": "2024-03-17"
+    "growth_engagements": -71
   },
   {
     "date": "2024-03-17",
@@ -347,9 +317,7 @@
     "trend_impressions": -20.6,
     "trend_reach": -12.9,
     "growth_likes": 41,
-    "growth_engagements": 56,
-    "compareDays": 7,
-    "prevDate": "2024-03-10"
+    "growth_engagements": 56
   },
   {
     "date": "2024-03-10",
@@ -369,9 +337,7 @@
     "trend_impressions": -3.8,
     "trend_reach": -14.7,
     "growth_likes": -89,
-    "growth_engagements": -109,
-    "compareDays": 7,
-    "prevDate": "2024-03-03"
+    "growth_engagements": -109
   },
   {
     "date": "2024-03-03",
@@ -391,9 +357,7 @@
     "trend_impressions": -12.9,
     "trend_reach": -2.3,
     "growth_likes": -78,
-    "growth_engagements": -86,
-    "compareDays": 7,
-    "prevDate": "2024-02-25"
+    "growth_engagements": -86
   },
   {
     "date": "2024-02-25",
@@ -413,9 +377,7 @@
     "trend_impressions": 14.2,
     "trend_reach": -3.6,
     "growth_likes": -16,
-    "growth_engagements": 20,
-    "compareDays": 7,
-    "prevDate": "2024-02-18"
+    "growth_engagements": 20
   },
   {
     "date": "2024-02-18",
@@ -435,9 +397,7 @@
     "trend_impressions": -14.6,
     "trend_reach": -9.4,
     "growth_likes": -31,
-    "growth_engagements": -14,
-    "compareDays": 7,
-    "prevDate": "2024-02-11"
+    "growth_engagements": -14
   },
   {
     "date": "2024-02-11",
@@ -457,9 +417,7 @@
     "trend_impressions": -0.7,
     "trend_reach": 0.5,
     "growth_likes": -95,
-    "growth_engagements": -115,
-    "compareDays": 7,
-    "prevDate": "2024-02-04"
+    "growth_engagements": -115
   },
   {
     "date": "2024-02-04",
@@ -479,8 +437,6 @@
     "trend_impressions": 0,
     "trend_reach": 0,
     "growth_likes": 787,
-    "growth_engagements": 1026,
-    "compareDays": 7,
-    "prevDate": "2024-01-28"
+    "growth_engagements": 1026
   }
 ]

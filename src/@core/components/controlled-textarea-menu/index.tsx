@@ -2,7 +2,8 @@
 import React, { useState, useEffect, FormEvent } from 'react'
 
 //  **Mui Imports
-import { Box, Typography, MenuItem, Theme, styled } from '@mui/material'
+import { Box, Typography, MenuItem, Theme } from '@mui/material'
+import { styled } from '@mui/material/styles'
 import LoadingButton from '@mui/lab/LoadingButton'
 
 // **Custom Components
@@ -21,14 +22,23 @@ import useDeviceSizesMediaQuery from 'src/hooks/useDeviceSizesMediaQuery'
 // **Vendor Imports
 import toast from 'react-hot-toast'
 
-const CustomMenuItem = styled(MenuItem)(({theme}: {theme : Theme}) => ({
-  fontSize: '17px',
-  [theme.breakpoints.down('md')] : {
-    fontSize: '16px'
+const MenuItemWrapper = styled(MenuItem)({
+  backgroundColor: 'transparent !important',
+  '&:hover': {
+    backgroundColor: 'transparent'
+  },
+  '&:focus': {
+    backgroundColor: 'transparent'
   }
-}))
+})
 
-const TrendGraphMonitorTileAction = () => {
+const FormBoxWrapper = styled(Box)({
+  display: 'column',
+  height: 'auto',
+  overflowY: 'hidden'
+})
+
+const ControlledTextAreaMenu = () => {
   const [textareaValue, setTextareaValue] = useState<string>('')
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [isSuccess, setIsSuccess] = useState<boolean>(false)
@@ -59,31 +69,13 @@ const TrendGraphMonitorTileAction = () => {
         isLoading={isLoading}
         setIsLoading={setIsLoading}
         renderMenuItems={closeMenu => (
-          <MenuItem
-            sx={{
-              backgroundColor: 'transparent !important',
-              '&:hover': {
-                backgroundColor: 'transparent'
-              },
-              '&:focus': {
-                backgroundColor: 'transparent'
-              }
-            }}
-          >
+          <MenuItemWrapper>
             <form onSubmit={handleSubmit(closeMenu)}>
-              <Box
-                sx={{
-                  display: 'column',
-                  width: {
-                    xs: isMobileXs || isMobileS ? '255px' : isMobileM ? '300px' : '350px',
-                    sm: '350px'
-                  },
-                  height: 'auto',
-                  overflowY: 'hidden'
-                }}
+              <FormBoxWrapper
+                sx={{ width: { xs: isMobileXs || isMobileS ? '255px' : isMobileM ? '275px' : '300px', sm: '300px' } }}
               >
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
-                  <Typography variant='h5' sx={{ fontWeight: '700' }}>
+                  <Typography variant='h5' sx={{ fontWeight: '700', fontSize: '18px !important' }}>
                     Comments
                   </Typography>
 
@@ -111,7 +103,7 @@ const TrendGraphMonitorTileAction = () => {
                     marginBottom: '-2px'
                   }}
                 >
-                  <Typography variant='h6' sx={{ fontSize: '16px !important', display: 'flex', alignItems: 'center' }}>
+                  <Typography variant='h6' sx={{ fontSize: '15px !important', display: 'flex', alignItems: 'center' }}>
                     <PsychologyAltIcon fontSize='small' color='primary' sx={{ marginRight: '5px' }} />{' '}
                     {!textareaValue ? 'There are no comments.' : 'Make comments meaningful'}
                   </Typography>
@@ -119,36 +111,36 @@ const TrendGraphMonitorTileAction = () => {
                 <Box>
                   <CommentTextarea callback={setTextareaValue} value={textareaValue} />
                 </Box>
-              </Box>
+              </FormBoxWrapper>
             </form>
-          </MenuItem>
+          </MenuItemWrapper>
         )}
       />
       <ControlledIconMenuButton
         icon={<MoreVertSharpIcon sx={theme => ({ color: theme.palette.grey['A200'] })} />}
         renderMenuItems={closeMenu => [
-          <CustomMenuItem key='z1234' onClick={closeMenu}>
+          <MenuItem key='z1234' sx={{ fontSize: '15px !important' }} onClick={closeMenu}>
             Connect your data...
-          </CustomMenuItem>,
-          <CustomMenuItem key='z2345' onClick={closeMenu}>
+          </MenuItem>,
+          <MenuItem key='z2345' sx={{ fontSize: '15px !important' }} onClick={closeMenu}>
             Edit...
-          </CustomMenuItem>,
-          <CustomMenuItem key='z3456' onClick={closeMenu}>
+          </MenuItem>,
+          <MenuItem key='z3456' sx={{ fontSize: '15px !important' }} onClick={closeMenu}>
             Share
-          </CustomMenuItem>,
-          <CustomMenuItem key='z4567' onClick={closeMenu}>
+          </MenuItem>,
+          <MenuItem key='z4567' sx={{ fontSize: '15px !important' }} onClick={closeMenu}>
             Download as
-          </CustomMenuItem>,
-          <CustomMenuItem key='z5678' onClick={closeMenu}>
+          </MenuItem>,
+          <MenuItem key='z5678' sx={{ fontSize: '15px !important' }} onClick={closeMenu}>
             About this Tool
-          </CustomMenuItem>,
-          <CustomMenuItem key='z6789' onClick={closeMenu}>
+          </MenuItem>,
+          <MenuItem key='z6789' sx={{ fontSize: '15px !important' }} onClick={closeMenu}>
             Remove from Dashboard
-          </CustomMenuItem>
+          </MenuItem>
         ]}
       />
     </Box>
   )
 }
 
-export default TrendGraphMonitorTileAction
+export default ControlledTextAreaMenu

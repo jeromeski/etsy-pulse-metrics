@@ -45,7 +45,7 @@ const TrendGraphMonitorTile = ({
   stackId
 }: TrendGraphMonitorTileProps) => {
   return (
-    <Card sx={{ padding: '15px 15px 0 15px', height: '100%', width: '100%', borderRadius: '5px' }}>
+    <Card sx={{ padding: '15px 15px 0 15px', height: '100%', width: '100%', borderRadius: '5px', maxHeight: '200px' }}>
       {title && (
         <CardHeader
           title={<TitleCardHeader size='medium'>{title}</TitleCardHeader>}
@@ -56,7 +56,7 @@ const TrendGraphMonitorTile = ({
           }}
         />
       )}
-      <CardContent sx={{ padding: '0 0 5px 0 !important' }}>
+      <CardContent sx={{ padding: '0 15px !important' }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '15px' }}>
           <MetricTotalHeading>{total}</MetricTotalHeading>
           <TrendPercentageIndicator growth={growth} />

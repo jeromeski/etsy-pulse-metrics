@@ -2,7 +2,8 @@
 import { Box } from '@mui/material'
 
 // ** Third Party Imports
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts'
+import { CurveType } from 'recharts/types/shape/Curve'
 
 // ** Custom Component Imports
 import ControlledChartAxisTick from 'src/@core/components/recharts/controlled-chart-axis-tick'
@@ -11,72 +12,62 @@ import ToolTipChart from 'src/@core/components/tool-tip-chart'
 // ** Hooks
 import useDeviceSizesMediaQuery from 'src/hooks/useDeviceSizesMediaQuery'
 
-interface ControlledAreaChartProps {
-  chartData: string[]
-  direction: boolean
-  dataKeyXaxis: string
-  dataKeyArea: string
-  stackId: string
-  type?: any
-  tickCount?: any
-  stroke?: string
-  fill?: string
-  orientation?: 'right' | 'left'
-  strokeWidth?: string | number
-  reversed?: boolean
-}
+// ** Type Imports
+import { ControlledAreaChartProps } from 'src/views/social-media/types'
 
 const ControlledAreaChart: React.FC<ControlledAreaChartProps> = ({
   chartData,
-  direction,
+  direction = 'ltr',
   dataKeyXaxis,
-  dataKeyArea,
-  stackId,
-  type,
-  tickCount,
-  stroke,
-  fill,
-  orientation,
-  strokeWidth,
-  reversed,
-  ...props
+  areaKeys,
+  tickCount = 4,
+  orientation = 'left',
+  reversed = true,
+  isReferenceLine = true
 }) => {
-  const { isMobileXs, isMobileS, isMobileM, isTablet, isLaptop } = useDeviceSizesMediaQuery()
+  const { isSmallScreen, isLaptop, isTablet } = useDeviceSizesMediaQuery()
+
   return (
-    <Box sx={{ height: '250px', width: '100%' }}>
-      <ResponsiveContainer height='100%' width='100%'>
-        <AreaChart height={350} data={chartData} style={{ direction }} margin={{ left: -20 }}>
-          <CartesianGrid />
-          <XAxis
-            dataKey='date'
-            reversed={reversed}
-            tickCount={isLaptop ? 9 : isTablet ? 7 : 3}
-            tick={props => {
-              return <ControlledChartAxisTick x={props.x} y={props.y} payload={props.payload} rotation={-45} />
-            }}
-            style={{
-              fontSize: isMobileXs || isMobileS || isMobileM || isTablet ? '.9rem' : '1rem'
-            }}
-          />
-          <YAxis
-            tickCount={4}
-            orientation={orientation}
-            style={{
-              fontSize: isMobileXs || isMobileS || isMobileM || isTablet ? '.9rem' : '1rem'
-            }}
-          />
-          <Tooltip content={ToolTipChart} />
+    <ResponsiveContainer height='100%' width='100%'>
+      <AreaChart
+        height={350}
+        data={chartData}
+        style={{ direction }}
+        margin={{ left: isSmallScreen ? -35 : -30, bottom: -9 }}
+      >
+        <CartesianGrid vertical={false} strokeDasharray='3 3' />
+        {isReferenceLine && <ReferenceLine y={80} stroke='#D47F85' strokeWidth={2} />}
+
+        <XAxis
+          dataKey={dataKeyXaxis}
+          reversed={reversed}
+          tickCount={isLaptop ? 9 : isTablet ? 7 : 3}
+          tick={props => <ControlledChartAxisTick x={props.x} y={props.y} payload={props.payload} rotation={-45} />}
+          style={{
+            fontSize: isSmallScreen || isTablet ? '.9rem' : '1rem'
+          }}
+        />
+        <YAxis
+          tickCount={tickCount}
+          orientation={orientation}
+          style={{
+            fontSize: isSmallScreen || isTablet ? '10px' : '12px'
+          }}
+        />
+        <Tooltip content={ToolTipChart} />
+        {areaKeys.map((areaKey, index) => (
           <Area
-            type={type}
-            dataKey={dataKeyArea}
-            stackId={stackId}
-            stroke={stroke}
-            strokeWidth={strokeWidth}
-            fill={fill}
+            key={index}
+            type={areaKey.type || 'monotone'}
+            dataKey={areaKey.dataKey}
+            stackId={areaKey.stackId || 'defaultStack'}
+            stroke={areaKey.stroke || '#8884d8'}
+            strokeWidth={areaKey.strokeWidth || 2}
+            fill={areaKey.fill || '#8884d8'}
           />
-        </AreaChart>
-      </ResponsiveContainer>
-    </Box>
+        ))}
+      </AreaChart>
+    </ResponsiveContainer>
   )
 }
 
