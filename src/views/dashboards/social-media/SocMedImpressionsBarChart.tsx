@@ -9,7 +9,7 @@ import { Box, CircularProgress } from '@mui/material'
 
 // **Custom Components
 import ChartLegend from 'src/@core/components/chart-legend'
-import ControlledHorBarChart from 'src/@core/components/recharts/controlled-hor-bar-chart'
+import ControlledVerBarChart from 'src/@core/components/recharts/controlled-ver-bar-chart'
 import CardControlledComment from 'src/@core/components/card-controlled-comment'
 
 // ** Utils Import
@@ -22,18 +22,14 @@ import { daily } from 'src/views/social-media/data/fb'
 // **Type Imports
 import { DailyDataProps } from 'src/views/social-media/types'
 
-const SocMedEngagementBarChart = () => {
+const SocMedImpressionsBarChart = () => {
   const { isSmallScreen, isTablet, isLaptop, isLaptopL, isDesktop } = useDeviceSizesMediaQuery()
   const [chartData, setChartData] = useState<DailyDataProps[]>([])
-  const [title, setTitle] = useState<string>('Likes, Comments and Shares (30 days)')
+  const [title, setTitle] = useState<string>('Daily Likes (7 days)')
   const [direction, setDirection] = useState<string>('ltr')
   const [isLoading, setIsLoading] = useState<boolean | null>(null)
 
-  const barKeys = [
-    { dataKey: 'post_likes', fill: '#3b5998' },
-    { dataKey: 'comments', fill: '#4267B2' },
-    { dataKey: 'shares', fill: '#8b9dc3' }
-  ]
+  const barKeys = [{ dataKey: 'post_likes', fill: '#3b5998' }]
 
   const formatXAxis = (tickItem: any) => {
     const newFormat = format(new Date(tickItem), 'MMM d')
@@ -78,18 +74,9 @@ const SocMedEngagementBarChart = () => {
             }}
           >
             <ChartLegend color='#3b5998'>Likes</ChartLegend>
-            <ChartLegend color='#4267B2'>Comments</ChartLegend>
-            <ChartLegend color='#8b9dc3'>Shares</ChartLegend>
           </Box>
           <Box sx={{ height: 'auto', width: '100%' }}>
-            <ControlledHorBarChart
-              data={chartData}
-              barKeys={barKeys}
-              formatXAxis={formatXAxis}
-              direction={direction}
-              isRefLine={true}
-              refLinePos={75}
-            />
+            <ControlledVerBarChart data={chartData} barKeys={barKeys} formatXAxis={formatXAxis} direction='ltr' />
           </Box>
         </Box>
       </CardControlledComment>
@@ -103,4 +90,4 @@ const SocMedEngagementBarChart = () => {
   }
 }
 
-export default SocMedEngagementBarChart
+export default SocMedImpressionsBarChart

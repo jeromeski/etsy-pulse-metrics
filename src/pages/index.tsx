@@ -7,10 +7,9 @@ import SocMedVisitsPerCountry from 'src/views/dashboards/social-media/SocMedVisi
 import SocMedDailyMetricsInsight from 'src/views/dashboards/social-media/SocMedDailyMetricsInsight'
 // **Hooks Imports
 import useDeviceSizesMediaQuery from 'src/hooks/useDeviceSizesMediaQuery'
+import SocMedImpressionsBarChart from 'src/views/dashboards/social-media/SocMedImpressionsBarChart'
 
 const Home = () => {
-  const { isSmallScreen } = useDeviceSizesMediaQuery()
-
   return (
     <Grid container>
       <Grid item xs={0} lg={2}>
@@ -18,6 +17,10 @@ const Home = () => {
       </Grid>
       <Grid item xs={12} lg={10}>
         <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <SocMedImpressionsBarChart />
+          </Grid>
+
           <Grid item xs={12}>
             <SocMedDailyMetricsInsight />
           </Grid>
